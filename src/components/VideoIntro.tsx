@@ -7,6 +7,8 @@ interface VideoIntroProps {
 export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isEnding, setIsEnding] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -21,47 +23,69 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
     };
 
     const handleCanPlay = () => {
-      video.play().catch(console.error);
+      setVideoLoaded(true);
+      video.play().catch(() => {
+        setVideoError(true);
+      });
+    };
+
+    const handleError = () => {
+      setVideoError(true);
     };
 
     video.addEventListener('ended', handleVideoEnd);
     video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
 
     return () => {
       video.removeEventListener('ended', handleVideoEnd);
       video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('error', handleError);
     };
   }, [onVideoEnd]);
 
+  // Show fallback if video error or after 3 seconds of no load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!videoLoaded) {
+        setVideoError(true);
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [videoLoaded]);
+
   return (
     <div className={`fixed inset-0 z-50 ${isEnding ? 'video-fade-out' : ''}`}>
-      <video
-        ref={videoRef}
-        className="w-full h-full object-cover"
-        muted
-        autoPlay
-        playsInline
-        preload="auto"
-      >
-        <source src="/intro.mp4" type="video/mp4" />
-        {/* Fallback content if video fails to load */}
-        <div className="w-full h-full bg-gradient-lab-bg flex items-center justify-center">
+      {!videoError ? (
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          muted
+          autoPlay
+          playsInline
+          preload="auto"
+        >
+          <source src="/intro.mp4" type="video/mp4" />
+        </video>
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-6xl font-bold bg-gradient-neural bg-clip-text text-transparent mb-4">
+            <h1 className="text-6xl font-bold text-white mb-4">
               Masha's Innovation Lab
             </h1>
-            <p className="text-xl text-muted-foreground">
-              Please add your intro.mp4 video to the public folder
+            <p className="text-xl text-gray-300 mb-8">
+              Welcome to the interactive experience
             </p>
             <button 
               onClick={onVideoEnd}
-              className="mt-8 px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              className="px-8 py-3 bg-white text-gray-900 rounded-lg hover:bg-gray-200 transition-colors font-semibold"
             >
               Enter the Lab
             </button>
           </div>
         </div>
-      </video>
+      )}
     </div>
   );
 };
