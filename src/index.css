@@ -2,41 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Masha's Innovation Lab Design System - Cinematic Sci-Fi Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Day Mode - Clean Tech Laboratory */
+    --background: 210 20% 98%;
+    --foreground: 224 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 15% 96%;
+    --card-foreground: 224 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 15% 98%;
+    --popover-foreground: 224 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 15% 92%;
+    --secondary-foreground: 224 15% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 15% 94%;
+    --muted-foreground: 224 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 195 100% 85%;
+    --accent-foreground: 224 15% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 20% 88%;
+    --input: 214 20% 92%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    /* Innovation Lab Specific Colors */
+    --glow-primary: 217 91% 60%;
+    --glow-secondary: 195 100% 70%;
+    --glow-accent: 280 100% 70%;
+    --holographic: 300 100% 80%;
+    --neural: 60 100% 70%;
+    
+    /* Gradients */
+    --gradient-holographic: linear-gradient(135deg, 
+      hsl(var(--glow-primary) / 0.3), 
+      hsl(var(--glow-secondary) / 0.3), 
+      hsl(var(--glow-accent) / 0.3));
+    --gradient-neural: linear-gradient(90deg, 
+      hsl(var(--glow-primary)), 
+      hsl(var(--neural)), 
+      hsl(var(--glow-accent)));
+    --gradient-lab-bg: linear-gradient(135deg, 
+      hsl(var(--background)), 
+      hsl(210 20% 95%));
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +75,54 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Night Mode - Holographic Laboratory */
+    --background: 224 25% 8%;
+    --foreground: 210 20% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 224 20% 12%;
+    --card-foreground: 210 20% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 224 25% 8%;
+    --popover-foreground: 210 20% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 224 25% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 224 15% 18%;
+    --secondary-foreground: 210 20% 92%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 224 15% 15%;
+    --muted-foreground: 210 15% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 280 100% 70%;
+    --accent-foreground: 224 25% 8%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 210 20% 92%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 224 15% 18%;
+    --input: 224 15% 18%;
+    --ring: 217 91% 60%;
+
+    /* Enhanced glow effects for night mode */
+    --glow-primary: 217 91% 60%;
+    --glow-secondary: 195 100% 70%;
+    --glow-accent: 280 100% 70%;
+    --holographic: 300 100% 80%;
+    --neural: 60 100% 70%;
+    
+    /* Night mode gradients */
+    --gradient-holographic: linear-gradient(135deg, 
+      hsl(var(--glow-primary) / 0.6), 
+      hsl(var(--glow-secondary) / 0.6), 
+      hsl(var(--glow-accent) / 0.6));
+    --gradient-neural: linear-gradient(90deg, 
+      hsl(var(--glow-primary)), 
+      hsl(var(--neural)), 
+      hsl(var(--glow-accent)));
+    --gradient-lab-bg: radial-gradient(ellipse at center, 
+      hsl(224 20% 12%), 
+      hsl(var(--background)));
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +140,65 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+  }
+
+  /* Custom animations for Innovation Lab */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--glow-primary) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--glow-primary) / 0.8); }
+  }
+
+  @keyframes neural-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes holographic-shift {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(90deg); }
+  }
+
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .neural-flow {
+    background: var(--gradient-neural);
+    background-size: 400% 400%;
+    animation: neural-flow 3s ease infinite;
+  }
+
+  .holographic {
+    background: var(--gradient-holographic);
+    animation: holographic-shift 4s ease-in-out infinite;
+  }
+
+  /* Video transition effects */
+  .video-fade-out {
+    animation: fadeOut 2s ease-in-out forwards;
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; }
+  }
+
+  .lab-fade-in {
+    animation: fadeIn 2s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
