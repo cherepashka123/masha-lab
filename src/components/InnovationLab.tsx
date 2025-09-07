@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LabObject } from "./LabObject";
 import { ChatModal } from "./ChatModal";
 import { ThemeToggle } from "./ThemeToggle";
 import { ProgressTracker } from "./ProgressTracker";
+import { DesignThinkingRibbon } from "./DesignThinkingRibbon";
 import nycHologram from "@/assets/nyc-hologram.jpg";
 import neuralBrain from "@/assets/neural-brain.jpg";
 import fashionTech from "@/assets/fashion-tech.jpg";
@@ -16,6 +17,7 @@ export interface LabObjectData {
   image: string;
   position: { x: string; y: string };
   theme: string;
+  stage: number;
 }
 
 const labObjects: LabObjectData[] = [
@@ -25,31 +27,35 @@ const labObjects: LabObjectData[] = [
     description: "Ukrainian heritage, resilience, and roots",
     image: ukrainianFlag,
     position: { x: "10%", y: "20%" },
-    theme: "ukraine"
+    theme: "ukraine",
+    stage: 1 // Empathize
   },
   {
-    id: "nyc",
+    id: "nyc", 
     title: "NYC Life & Studies",
     description: "Life, studies, and career in New York",
     image: nycHologram,
     position: { x: "70%", y: "15%" },
-    theme: "nyc"
+    theme: "nyc",
+    stage: 2 // Define
+  },
+  {
+    id: "psychology",
+    title: "Psychology & Philosophy", 
+    description: "Mind, empathy, and human understanding",
+    image: neuralBrain,
+    position: { x: "15%", y: "65%" },
+    theme: "psychology",
+    stage: 3 // Ideate
   },
   {
     id: "fashion",
     title: "Fashion Tech",
-    description: "DRESSX, Threadress, Naked Confidence projects",
+    description: "DRESSX, Threadress, Naked Confidence projects", 
     image: fashionTech,
-    position: { x: "15%", y: "65%" },
-    theme: "fashion"
-  },
-  {
-    id: "psychology",
-    title: "Psychology & Philosophy",
-    description: "Mind, empathy, and human understanding",
-    image: neuralBrain,
     position: { x: "75%", y: "70%" },
-    theme: "psychology"
+    theme: "fashion",
+    stage: 4 // Prototype
   },
   {
     id: "business",
@@ -57,18 +63,33 @@ const labObjects: LabObjectData[] = [
     description: "Product management, strategy, and finance",
     image: dataDashboard,
     position: { x: "45%", y: "40%" },
-    theme: "business"
+    theme: "business",
+    stage: 5 // Test
   }
 ];
 
 export const InnovationLab = () => {
   const [selectedObject, setSelectedObject] = useState<LabObjectData | null>(null);
   const [exploredObjects, setExploredObjects] = useState<Set<string>>(new Set());
+  const [currentStage, setCurrentStage] = useState(1);
 
   const handleObjectClick = (object: LabObjectData) => {
     setSelectedObject(object);
     setExploredObjects(prev => new Set([...prev, object.id]));
+    
+    // Update current stage based on highest explored stage
+    const maxStage = Math.max(currentStage, object.stage);
+    setCurrentStage(maxStage);
   };
+
+  // Calculate progress through design thinking stages
+  useEffect(() => {
+    const exploredStages = Array.from(exploredObjects).map(id => 
+      labObjects.find(obj => obj.id === id)?.stage || 0
+    );
+    const highestStage = Math.max(1, ...exploredStages);
+    setCurrentStage(highestStage);
+  }, [exploredObjects]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -109,6 +130,9 @@ export const InnovationLab = () => {
           ))}
         </div>
       </main>
+
+      {/* Design Thinking Ribbon */}
+      <DesignThinkingRibbon currentStage={currentStage} />
 
       {/* Chat Modal */}
       {selectedObject && (
