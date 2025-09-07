@@ -22,62 +22,63 @@ const getThemeResponses = (theme: string, mode: 'research' | 'diary') => {
   const responses = {
     ukraine: {
       research: [
-        "Born in Ukraine, bringing resilience and cultural perspective to every project.",
-        "Fluent in Ukrainian, Russian, and English - bridging cultural gaps in international teams.",
-        "Heritage informs my approach to inclusive design and global market understanding."
+        "Ukrainian-born, fluent in Ukrainian, Russian, English, and intermediate French. Cultural bridge in global teams.",
+        "Volunteered with TABLETOCHKI Cancer Foundation, supporting 50+ children and teaching English during treatment.",
+        "Heritage provides unique perspective on resilience, community, and finding beauty in simplicity."
       ],
       diary: [
-        "Growing up in Ukraine taught me the power of community and perseverance. These values shape how I build teams and tackle challenges.",
-        "My Ukrainian heritage isn't just background - it's a lens for seeing opportunity in adversity and beauty in simplicity.",
-        "The warmth and creativity of Ukrainian culture influences my design philosophy and collaborative approach."
+        "Growing up in Ukraine taught me that strength isn't just surviving - it's creating beauty despite uncertainty.",
+        "Every conversation in multiple languages feels like code-switching between different parts of my identity.",
+        "Ukrainian warmth and creativity infuse everything I build - from products to partnerships."
       ]
     },
     nyc: {
       research: [
-        "NYU Psychology major, 3.9 GPA. Minors: Business, Social Entrepreneurship, Philosophy.",
-        "NYU coursework: Digital Business, Marketing, Programming, Statistics, Design Thinking.",
-        "NYU Pitch Competition finalist for innovative startup concepts."
+        "NYU Psychology B.A., 3.9 GPA. Minors: Business, Social Entrepreneurship, Philosophy. Expected May 2026.",
+        "Blair Academy alumna (4.0 GPA). Active in Luxury & Retail Association, Stern Founders Challenge Society.",
+        "NYU coursework: Digital Business Strategy, Social Media Strategy, Programming, Statistics, Management."
       ],
       diary: [
-        "New York taught me to think fast and dream big. Every subway ride was a lesson in human behavior.",
-        "NYU wasn't just education - it was immersion in a world where psychology meets business innovation.",
-        "The city's energy flows through everything I create. Fast-paced, diverse, endlessly inspiring."
+        "New York is my laboratory. Every subway ride teaches me about human behavior and urban psychology.",
+        "From Blair's structured environment to NYU's creative chaos - each step shaped my analytical yet intuitive approach.",
+        "The city's relentless pace matches my mind. Here, psychology meets business meets pure possibility."
       ]
     },
     fashion: {
       research: [
-        "DRESSX: Marketing & Strategy Intern 2024-25, Strategy/Product/Sustainability Summer 2025.",
-        "Threadress: Built AI-driven natural language search with vector-based style matching.",
-        "Naked Confidence: Co-founded perfume brand focusing on authentic self-expression."
+        "DRESSX: Marketing & Strategy Intern (May 2024-Jan 2025), then Strategy/Product/Sustainability (Summer 2025).",
+        "Threadress: AI-driven local fashion discovery. Natural language search converts style descriptions to vector matches for local boutique inventory.",
+        "Naked Confidence: Founded unisex perfume brand, collaborated with Ol.factory, researched 200+ consumers for signature scent development.",
+        "DRESSX achievements: Led Roblox x Charles & Keith campaign with 100+ creators, researched 20+ Snapchat agencies, enhanced Gen AI styling tool."
       ],
       diary: [
-        "Fashion tech isn't just about clothes - it's about identity in digital spaces. DRESSX opened my eyes to virtual fashion's potential.",
-        "Building Threadress felt like creating magic - turning 'I want something flowy and romantic' into perfect boutique finds.",
-        "Naked Confidence started from a simple truth: scent is memory, and confidence is choice."
+        "Fashion tech revealed something profound: clothing isn't just fabric - it's identity expressed in physical and digital spaces.",
+        "Threadress was born from frustration: 'I need a gold dress for tonight' shouldn't require hours of scrolling. AI should understand style, not just keywords.",
+        "At DRESSX, I saw the future: virtual fashion reducing waste while expanding self-expression. Sustainability meets imagination."
       ]
     },
     psychology: {
       research: [
-        "Psychology major with focus on cognitive science and behavioral analysis.",
-        "Philosophy minor exploring ethics, consciousness, and decision-making frameworks.",
-        "Applied psychological principles to UX design and product strategy."
+        "Psychology major focusing on cognitive science, behavioral analysis, and decision-making frameworks.",
+        "Philosophy minor exploring consciousness, ethics, and how philosophical thinking shapes product design.",
+        "Applied psychological insights to UX design, user research, and behavioral product strategy."
       ],
       diary: [
-        "Psychology taught me that behind every click, swipe, and purchase is a human story waiting to be understood.",
-        "Philosophy classes at 8am might have been brutal, but they taught me to question everything - especially 'obvious' solutions.",
-        "The intersection of mind and technology fascinates me. How do we build products that truly serve human nature?"
+        "Psychology reveals the 'why' behind every user interaction. Philosophy asks 'should we?' Technology answers 'how?'",
+        "Every A/B test is a glimpse into human nature. Every user interview unveils a story waiting to be served.",
+        "The mind fascinates me because it's the ultimate user interface - messy, beautiful, endlessly surprising."
       ]
     },
     business: {
       research: [
-        "DevolaTech: Growth Analyst role, data-driven strategy and market expansion.",
-        "Dragon Capital: Investment Banking Intern, financial modeling and market analysis.",
-        "Rise by Barclays: Fintech accelerator participant, design thinking pitch finalist."
+        "DevolaTech: Growth Analyst, generated 500+ leads, expanded into 3+ new markets through targeted B2B campaigns.",
+        "Dragon Capital: Investment Banking Intern, analyzed Green Bonds/Eurobonds, participated in 10+ conference calls, analyzed P&L for multi-million portfolios.",
+        "Rise by Barclays: Fintech accelerator participant, MVP development, surveyed 300+ users and 30+ retailers, pitched to industry judges."
       ],
       diary: [
-        "Dragon Capital showed me the art of seeing potential in numbers and narratives in data.",
-        "At DevolaTech, I learned that growth isn't just metrics - it's about understanding what makes users return.",
-        "Rise by Barclays was a masterclass in turning complex financial problems into elegant solutions."
+        "Dragon Capital taught me that every number tells a story. Behind every bond is a bet on the future.",
+        "DevolaTech showed me growth isn't just metrics - it's understanding what makes users return, recommend, and stay.",
+        "Rise by Barclays was intense: turning complex payment problems into elegant solutions under pressure. I loved every minute."
       ]
     }
   };

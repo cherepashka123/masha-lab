@@ -69,17 +69,17 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
           <source src="/intro.mp4" type="video/mp4" />
         </video>
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-6xl font-bold text-white mb-4">
+        <div className="w-full h-full bg-gradient-elegant flex items-center justify-center">
+          <div className="text-center fade-in-up">
+            <h1 className="text-7xl font-light text-lab-primary mb-6 tracking-wide">
               Masha's Innovation Lab
             </h1>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-xl text-lab-secondary mb-12 font-light">
               Welcome to the interactive experience
             </p>
             <button 
               onClick={onVideoEnd}
-              className="px-8 py-3 bg-white text-gray-900 rounded-lg hover:bg-gray-200 transition-colors font-semibold"
+              className="px-10 py-4 bg-lab-primary text-white rounded-xl hover:bg-lab-secondary transition-all duration-300 font-light text-lg tracking-wide shadow-lg hover:shadow-xl"
             >
               Enter the Lab
             </button>

@@ -12,58 +12,55 @@ export const LabObject = ({ object, isExplored, onClick }: LabObjectProps) => {
 
   return (
     <button
-      className={`
-        absolute w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden
-        transition-all duration-300 transform-gpu
-        hover:scale-110 focus:scale-110 focus:outline-none
-        ${isExplored ? 'animate-pulse-glow' : 'animate-pulse-glow opacity-80'}
-        ${isHovered ? 'z-20' : 'z-10'}
-        float
-      `}
+      className={`absolute transform -translate-x-1/2 -translate-y-1/2 group transition-all duration-500 ${
+        isExplored ? 'opacity-80' : 'opacity-100'
+      }`}
       style={{
         left: object.position.x,
         top: object.position.y,
-        animationDelay: `${Math.random() * 2}s`
       }}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onFocus={() => setIsHovered(true)}
-      onBlur={() => setIsHovered(false)}
-      aria-label={`Explore ${object.title}: ${object.description}`}
     >
-      {/* Glow effect */}
-      <div className="absolute inset-0 bg-gradient-holographic rounded-xl blur-sm opacity-60" />
+      {/* Subtle glow effect */}
+      <div 
+        className={`absolute inset-0 rounded-2xl transition-all duration-700 ${
+          isHovered ? 'subtle-glow scale-125' : 'scale-100'
+        } ${isExplored ? 'bg-lab-accent/10' : 'bg-lab-primary/15'}`} 
+      />
       
-      {/* Object image */}
-      <div className="relative w-full h-full">
+      {/* Main object container */}
+      <div className={`relative w-28 h-28 rounded-2xl overflow-hidden border transition-all duration-500 shadow-lg ${
+        isExplored 
+          ? 'border-lab-accent/30 hover:border-lab-accent/60' 
+          : 'border-lab-primary/20 hover:border-lab-primary/40'
+      } ${isHovered ? 'scale-105 shadow-xl' : 'scale-100'} bg-card/80 backdrop-blur-sm`}>
+        
+        {/* Object image */}
         <img
           src={object.image}
           alt={object.title}
-          className="w-full h-full object-cover rounded-xl"
+          className={`w-full h-full object-cover transition-all duration-500 ${
+            isHovered ? 'scale-105' : 'scale-100'
+          }`}
         />
-        
-        {/* Overlay with holographic effect */}
-        <div className="absolute inset-0 bg-gradient-holographic opacity-30 rounded-xl animate-holographic-shift" />
         
         {/* Exploration indicator */}
         {isExplored && (
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-background" />
+          <div className="absolute top-2 right-2 w-2 h-2 bg-lab-accent rounded-full" />
         )}
       </div>
 
-      {/* Tooltip on hover */}
+      {/* Elegant hover tooltip */}
       {isHovered && (
-        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 
-                        bg-card border border-border rounded-lg px-3 py-2 
-                        text-sm font-medium text-card-foreground whitespace-nowrap
-                        shadow-lg z-30">
-          <div className="font-semibold">{object.title}</div>
-          <div className="text-xs text-muted-foreground">{object.description}</div>
-          {/* Tooltip arrow */}
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 
-                          w-0 h-0 border-l-4 border-r-4 border-t-4 
-                          border-l-transparent border-r-transparent border-t-card" />
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-6 px-4 py-3 bg-card/95 backdrop-blur-md border border-border/50 rounded-xl shadow-xl fade-in-up max-w-xs">
+          <h4 className="text-sm font-medium text-card-foreground whitespace-nowrap">
+            {object.title}
+          </h4>
+          <p className="text-xs text-muted-foreground mt-1 whitespace-nowrap">
+            {object.description}
+          </p>
         </div>
       )}
     </button>

@@ -71,18 +71,18 @@ export const InnovationLab = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-lab-bg lab-fade-in overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-lab-bg fade-in-up overflow-hidden">
       {/* Header with controls */}
-      <div className="absolute top-6 left-6 right-6 z-10 flex justify-between items-start">
+      <div className="absolute top-8 left-8 right-8 z-10 flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-neural bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-light text-foreground mb-3 tracking-wide">
             Masha's Innovation Lab
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Tap a glowing object to explore
+          <p className="text-base text-muted-foreground font-light">
+            Explore the interactive elements below
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <ProgressTracker 
             total={labObjects.length} 
             explored={exploredObjects.size} 
@@ -93,13 +93,18 @@ export const InnovationLab = () => {
 
       {/* Lab Objects */}
       <div className="relative w-full h-full">
-        {labObjects.map((object) => (
-          <LabObject
+        {labObjects.map((object, index) => (
+          <div
             key={object.id}
-            object={object}
-            isExplored={exploredObjects.has(object.id)}
-            onClick={() => handleObjectClick(object)}
-          />
+            className="fade-in-up"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <LabObject
+              object={object}
+              isExplored={exploredObjects.has(object.id)}
+              onClick={() => handleObjectClick(object)}
+            />
+          </div>
         ))}
       </div>
 
@@ -111,11 +116,11 @@ export const InnovationLab = () => {
         />
       )}
 
-      {/* Ambient particles/effects */}
+      {/* Subtle ambient elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-glow-primary rounded-full animate-pulse opacity-60" />
-        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-glow-secondary rounded-full animate-pulse opacity-40" />
-        <div className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-glow-accent rounded-full animate-pulse opacity-50" />
+        <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-lab-secondary rounded-full opacity-20 float" />
+        <div className="absolute bottom-1/3 right-1/3 w-1 h-1 bg-lab-accent rounded-full opacity-15 float" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-2/3 left-2/3 w-0.5 h-0.5 bg-lab-primary rounded-full opacity-10 float" style={{ animationDelay: '2s' }} />
       </div>
     </div>
   );
