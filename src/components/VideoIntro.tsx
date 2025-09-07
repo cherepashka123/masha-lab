@@ -5,63 +5,60 @@ interface VideoIntroProps {
 }
 
 export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isEnding, setIsEnding] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+  const [showSkip, setShowSkip] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleVideoEnd = () => {
-      setIsEnding(true);
-      // Start fade out animation
-      setTimeout(() => {
-        onVideoEnd();
-      }, 2000); // Match CSS animation duration
-    };
-
-    const handleCanPlay = () => {
-      setVideoLoaded(true);
-      video.play().catch(() => {
-        setVideoError(true);
-      });
-    };
-
-    const handleError = () => {
-      setVideoError(true);
-    };
-
-    video.addEventListener('ended', handleVideoEnd);
-    video.addEventListener('canplay', handleCanPlay);
-    video.addEventListener('error', handleError);
-
-    return () => {
-      video.removeEventListener('ended', handleVideoEnd);
-      video.removeEventListener('canplay', handleCanPlay);
-      video.removeEventListener('error', handleError);
-    };
-  }, [onVideoEnd]);
-
-  // Show fallback if video error or after 3 seconds of no load
-  useEffect(() => {
+    // Show skip button after 2 seconds
     const timer = setTimeout(() => {
-      if (!videoLoaded) {
-        setVideoError(true);
-      }
-    }, 3000);
+      setShowSkip(true);
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [videoLoaded]);
+  }, []);
 
-  // Skip video intro completely and go straight to lab
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onVideoEnd();
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [onVideoEnd]);
+  const handleSkip = () => {
+    onVideoEnd();
+  };
 
-  return null;
+  return (
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+      {/* Animated intro content */}
+      <div className="text-center space-y-8 animate-fade-in">
+        <div className="space-y-4">
+          <h1 className="text-4xl md:text-6xl font-thin text-white tracking-[0.2em] animate-fade-in-up">
+            MASHA'S
+          </h1>
+          <div className="w-24 h-px bg-white/30 mx-auto" />
+          <h2 className="text-xl md:text-2xl font-light text-white/80 tracking-[0.3em] animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            INNOVATION LAB
+          </h2>
+        </div>
+        
+        <div className="text-sm text-white/60 font-light tracking-wide animate-fade-in-up" style={{ animationDelay: '1s' }}>
+          Exploring the intersection of psychology, technology & business
+        </div>
+
+        {/* Auto-advance after 4 seconds */}
+        <div className="w-48 h-1 bg-white/10 mx-auto rounded-full overflow-hidden">
+          <div className="h-full bg-white/50 rounded-full animate-[fadeIn_4s_ease-out_forwards] origin-left scale-x-0"></div>
+        </div>
+      </div>
+
+      {/* Skip button */}
+      {showSkip && (
+        <button
+          onClick={handleSkip}
+          className="absolute bottom-8 right-8 text-white/60 hover:text-white text-sm font-light tracking-wider transition-colors duration-300 animate-fade-in"
+        >
+          SKIP INTRO →
+        </button>
+      )}
+
+      {/* Auto advance after 5 seconds */}
+      <div className="absolute inset-0" onClick={handleSkip} />
+      
+      {/* Auto advance timer */}
+      {setTimeout(() => onVideoEnd(), 5000) && null}
+    </div>
+  );
 };

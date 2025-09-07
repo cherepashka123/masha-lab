@@ -71,41 +71,42 @@ export const InnovationLab = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background overflow-hidden relative">
-      {/* Farfetch-inspired header */}
-      <header className="relative z-10 py-12 px-6 border-b border-border">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h1 className="text-3xl font-light text-foreground tracking-wide">
-                Masha's Innovation Lab
-              </h1>
-              <p className="text-sm text-muted-foreground font-light mt-2">
-                Psychology × Technology × Strategy
-              </p>
-            </div>
-            <div className="flex items-center gap-6">
-              <ProgressTracker total={labObjects.length} explored={exploredObjects.size} />
-              <ThemeToggle />
-            </div>
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="relative py-24 border-b border-border/20">
+        <div className="container mx-auto px-6 text-center">
+          <div className="max-w-3xl mx-auto space-y-6">
+            <h1 className="text-4xl md:text-5xl font-thin tracking-[0.15em] text-foreground">
+              INNOVATION LAB
+            </h1>
+            <div className="w-24 h-px bg-foreground/20 mx-auto" />
+            <p className="text-lg text-muted-foreground font-light leading-relaxed tracking-wide">
+              Exploring the intersection of psychology, technology & business strategy
+            </p>
+          </div>
+          
+          <div className="flex justify-center items-center gap-8 mt-12">
+            <ProgressTracker 
+              total={labObjects.length} 
+              explored={exploredObjects.size} 
+            />
+            <ThemeToggle />
           </div>
         </div>
-      </header>
+      </section>
 
-      {/* Main grid layout - Farfetch style */}
-      <main className="px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {labObjects.map((object, index) => (
-              <LabObject
-                key={object.id}
-                object={object}
-                isExplored={exploredObjects.has(object.id)}
-                onClick={() => handleObjectClick(object)}
-                index={index}
-              />
-            ))}
-          </div>
+      {/* Projects Grid */}
+      <main className="container mx-auto px-6 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          {labObjects.map((object, index) => (
+            <LabObject
+              key={object.id}
+              object={object}
+              isExplored={exploredObjects.has(object.id)}
+              onClick={() => handleObjectClick(object)}
+              index={index}
+            />
+          ))}
         </div>
       </main>
 
