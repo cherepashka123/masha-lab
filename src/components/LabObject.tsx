@@ -5,64 +5,73 @@ interface LabObjectProps {
   object: LabObjectData;
   isExplored: boolean;
   onClick: () => void;
+  index: number;
 }
 
-export const LabObject = ({ object, isExplored, onClick }: LabObjectProps) => {
+export const LabObject = ({ object, isExplored, onClick, index }: LabObjectProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
-      className={`absolute transform -translate-x-1/2 -translate-y-1/2 group transition-all duration-500 ${
-        isExplored ? 'opacity-80' : 'opacity-100'
-      }`}
-      style={{
-        left: object.position.x,
-        top: object.position.y,
-      }}
+    <div
+      className={`group cursor-pointer transition-all duration-300 hover:scale-[1.02] animate-fade-in-up`}
+      style={{ animationDelay: `${index * 100}ms` }}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Subtle glow effect */}
-      <div 
-        className={`absolute inset-0 rounded-2xl transition-all duration-700 ${
-          isHovered ? 'subtle-glow scale-125' : 'scale-100'
-        } ${isExplored ? 'bg-lab-accent/10' : 'bg-lab-primary/15'}`} 
-      />
-      
-      {/* Main object container */}
-      <div className={`relative w-28 h-28 rounded-2xl overflow-hidden border transition-all duration-500 shadow-lg ${
-        isExplored 
-          ? 'border-lab-accent/30 hover:border-lab-accent/60' 
-          : 'border-lab-primary/20 hover:border-lab-primary/40'
-      } ${isHovered ? 'scale-105 shadow-xl' : 'scale-100'} bg-card/80 backdrop-blur-sm`}>
+      {/* Card Container - Farfetch style */}
+      <div className={`
+        relative aspect-[4/3] rounded-lg overflow-hidden bg-card border border-border
+        transition-all duration-300 hover:shadow-lg hover:border-lab-primary/30
+        ${isExplored ? 'ring-1 ring-lab-primary/20' : ''}
+      `}>
         
-        {/* Object image */}
+        {/* Image */}
         <img
           src={object.image}
           alt={object.title}
-          className={`w-full h-full object-cover transition-all duration-500 ${
-            isHovered ? 'scale-105' : 'scale-100'
-          }`}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         
-        {/* Exploration indicator */}
-        {isExplored && (
-          <div className="absolute top-2 right-2 w-2 h-2 bg-lab-accent rounded-full" />
-        )}
-      </div>
-
-      {/* Elegant hover tooltip */}
-      {isHovered && (
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-6 px-4 py-3 bg-card/95 backdrop-blur-md border border-border/50 rounded-xl shadow-xl fade-in-up max-w-xs">
-          <h4 className="text-sm font-medium text-card-foreground whitespace-nowrap">
-            {object.title}
-          </h4>
-          <p className="text-xs text-muted-foreground mt-1 whitespace-nowrap">
-            {object.description}
-          </p>
+        {/* Overlay */}
+        <div className={`
+          absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent
+          transition-opacity duration-300 
+          ${isHovered ? 'opacity-80' : 'opacity-40'}
+        `} />
+        
+        {/* Content */}
+        <div className="absolute inset-0 p-6 flex flex-col justify-end">
+          <div className={`transform transition-all duration-300 ${isHovered ? 'translate-y-0' : 'translate-y-2'}`}>
+            <h3 className="text-white font-light text-lg mb-2 tracking-wide">
+              {object.title}
+            </h3>
+            <p className={`text-white/80 text-sm font-light leading-relaxed transition-all duration-300 ${
+              isHovered ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0 overflow-hidden'
+            }`}>
+              {object.description}
+            </p>
+          </div>
         </div>
-      )}
-    </button>
+        
+        {/* Exploration Badge */}
+        {isExplored && (
+          <div className="absolute top-4 right-4">
+            <div className="w-2 h-2 bg-lab-primary rounded-full animate-pulse" />
+          </div>
+        )}
+        
+        {/* Click indicator */}
+        <div className={`
+          absolute bottom-4 right-4 
+          w-8 h-8 rounded-full border border-white/30 
+          flex items-center justify-center
+          transition-all duration-300
+          ${isHovered ? 'scale-110 bg-white/10' : 'scale-100'}
+        `}>
+          <div className="w-1 h-1 bg-white rounded-full" />
+        </div>
+      </div>
+    </div>
   );
 };

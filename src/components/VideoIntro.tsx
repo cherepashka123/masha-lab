@@ -55,37 +55,13 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
     return () => clearTimeout(timer);
   }, [videoLoaded]);
 
-  return (
-    <div className={`fixed inset-0 z-50 ${isEnding ? 'video-fade-out' : ''}`}>
-      {!videoError ? (
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          muted
-          autoPlay
-          playsInline
-          preload="auto"
-        >
-          <source src="/intro.mp4" type="video/mp4" />
-        </video>
-      ) : (
-        <div className="w-full h-full bg-gradient-elegant flex items-center justify-center">
-          <div className="text-center fade-in-up">
-            <h1 className="text-7xl font-light text-lab-primary mb-6 tracking-wide">
-              Masha's Innovation Lab
-            </h1>
-            <p className="text-xl text-lab-secondary mb-12 font-light">
-              Welcome to the interactive experience
-            </p>
-            <button 
-              onClick={onVideoEnd}
-              className="px-10 py-4 bg-lab-primary text-white rounded-xl hover:bg-lab-secondary transition-all duration-300 font-light text-lg tracking-wide shadow-lg hover:shadow-xl"
-            >
-              Enter the Lab
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  // Skip video intro completely and go straight to lab
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onVideoEnd();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [onVideoEnd]);
+
+  return null;
 };

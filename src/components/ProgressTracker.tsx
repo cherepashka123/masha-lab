@@ -18,7 +18,7 @@ export const ProgressTracker = ({ total, explored }: ProgressTrackerProps) => {
       {/* Progress bar */}
       <div className="w-full bg-muted rounded-full h-2 mb-2">
         <div 
-          className="bg-glow-primary h-2 rounded-full transition-all duration-500 ease-out"
+          className="bg-lab-primary h-2 rounded-full transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -28,7 +28,7 @@ export const ProgressTracker = ({ total, explored }: ProgressTrackerProps) => {
         {Array.from({ length: total }).map((_, index) => (
           <div key={index} className="w-4 h-4 flex items-center justify-center">
             {index < explored ? (
-              <CheckCircle className="w-3 h-3 text-glow-primary" />
+              <CheckCircle className="w-3 h-3 text-lab-primary" />
             ) : (
               <Circle className="w-3 h-3 text-muted-foreground" />
             )}
@@ -37,7 +37,7 @@ export const ProgressTracker = ({ total, explored }: ProgressTrackerProps) => {
       </div>
       
       {explored === total && (
-        <div className="text-xs text-glow-primary font-medium text-center mt-1">
+        <div className="text-xs text-lab-primary font-medium text-center mt-1">
           Lab Complete! ✨
         </div>
       )}

@@ -71,42 +71,43 @@ export const InnovationLab = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-lab-bg fade-in-up overflow-hidden">
-      {/* Header with controls */}
-      <div className="absolute top-8 left-8 right-8 z-10 flex justify-between items-start">
-        <div>
-          <h1 className="text-4xl font-light text-foreground mb-3 tracking-wide">
-            Masha's Innovation Lab
-          </h1>
-          <p className="text-base text-muted-foreground font-light">
-            Explore the interactive elements below
-          </p>
-        </div>
-        <div className="flex items-center gap-6">
-          <ProgressTracker 
-            total={labObjects.length} 
-            explored={exploredObjects.size} 
-          />
-          <ThemeToggle />
-        </div>
-      </div>
-
-      {/* Lab Objects */}
-      <div className="relative w-full h-full">
-        {labObjects.map((object, index) => (
-          <div
-            key={object.id}
-            className="fade-in-up"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <LabObject
-              object={object}
-              isExplored={exploredObjects.has(object.id)}
-              onClick={() => handleObjectClick(object)}
-            />
+    <div className="min-h-screen bg-background overflow-hidden relative">
+      {/* Farfetch-inspired header */}
+      <header className="relative z-10 py-12 px-6 border-b border-border">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-3xl font-light text-foreground tracking-wide">
+                Masha's Innovation Lab
+              </h1>
+              <p className="text-sm text-muted-foreground font-light mt-2">
+                Psychology × Technology × Strategy
+              </p>
+            </div>
+            <div className="flex items-center gap-6">
+              <ProgressTracker total={labObjects.length} explored={exploredObjects.size} />
+              <ThemeToggle />
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </header>
+
+      {/* Main grid layout - Farfetch style */}
+      <main className="px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {labObjects.map((object, index) => (
+              <LabObject
+                key={object.id}
+                object={object}
+                isExplored={exploredObjects.has(object.id)}
+                onClick={() => handleObjectClick(object)}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </main>
 
       {/* Chat Modal */}
       {selectedObject && (
@@ -115,13 +116,6 @@ export const InnovationLab = () => {
           onClose={() => setSelectedObject(null)}
         />
       )}
-
-      {/* Subtle ambient elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-lab-secondary rounded-full opacity-20 float" />
-        <div className="absolute bottom-1/3 right-1/3 w-1 h-1 bg-lab-accent rounded-full opacity-15 float" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-2/3 left-2/3 w-0.5 h-0.5 bg-lab-primary rounded-full opacity-10 float" style={{ animationDelay: '2s' }} />
-      </div>
     </div>
   );
 };
