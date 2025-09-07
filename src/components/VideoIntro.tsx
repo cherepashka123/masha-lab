@@ -8,6 +8,7 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showSkip, setShowSkip] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     // Show skip button after 2 seconds
@@ -18,19 +19,49 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    // Auto-advance after 8 seconds if video doesn't play
+    const autoAdvanceTimer = setTimeout(() => {
+      console.log("Auto-advancing after 8 seconds");
+      onVideoEnd();
+    }, 8000);
+
+    return () => clearTimeout(autoAdvanceTimer);
+  }, [onVideoEnd]);
+
   const handleVideoEnd = () => {
+    console.log("Video ended naturally");
     onVideoEnd();
   };
 
   const handleSkip = () => {
+    console.log("User skipped video");
     onVideoEnd();
   };
 
-  const handleVideoError = () => {
-    console.log("Video failed to load: /intro.mp4");
+  const handleVideoError = (e: any) => {
+    console.log("Video failed to load:", e);
+    console.log("Video src:", videoRef.current?.src);
     setVideoError(true);
     // Auto-advance after 3 seconds if video fails
     setTimeout(() => onVideoEnd(), 3000);
+  };
+
+  const handleVideoLoaded = () => {
+    console.log("Video loaded successfully");
+    setVideoLoaded(true);
+  };
+
+  const handleVideoCanPlay = () => {
+    console.log("Video can play");
+    // Try to play the video
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.log("Failed to autoplay video:", err);
+        // If autoplay fails, show skip button immediately
+        setShowSkip(true);
+      });
+    }
   };
 
   if (videoError) {
@@ -93,16 +124,31 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
         playsInline
         onEnded={handleVideoEnd}
         onError={handleVideoError}
+        onLoadedData={handleVideoLoaded}
+        onCanPlay={handleVideoCanPlay}
+        onLoadStart={() => console.log("Video load started")}
+        onWaiting={() => console.log("Video waiting for data")}
+        onStalled={() => console.log("Video stalled")}
       >
         <source src="/intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
+      {/* Loading indicator */}
+      {!videoLoaded && !videoError && (
+        <div className="absolute inset-0 bg-black flex items-center justify-center">
+          <div className="text-center space-y-4">
+            <div className="w-12 h-12 border-4 border-white/20 border-t-white/60 rounded-full animate-spin" />
+            <p className="text-white/60 text-sm tracking-wide">Loading experience...</p>
+          </div>
+        </div>
+      )}
+
       {/* Skip button */}
       {showSkip && (
         <button
           onClick={handleSkip}
-          className="absolute bottom-8 right-8 text-white/60 hover:text-white text-sm font-light tracking-wider transition-colors duration-300 animate-fade-in bg-black/30 backdrop-blur-sm px-4 py-2 rounded-md"
+          className="absolute bottom-8 right-8 text-white/60 hover:text-white text-sm font-light tracking-wider transition-colors duration-300 animate-fade-in bg-black/30 backdrop-blur-sm px-4 py-2 rounded-md z-10"
         >
           SKIP INTRO →
         </button>
@@ -110,7 +156,7 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
 
       {/* Click to skip overlay */}
       <div 
-        className="absolute inset-0 cursor-pointer" 
+        className="absolute inset-0 cursor-pointer z-0" 
         onClick={handleSkip}
         title="Click to skip intro"
       />
