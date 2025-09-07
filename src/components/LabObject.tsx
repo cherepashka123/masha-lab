@@ -26,7 +26,7 @@ export const LabObject = ({ object, isExplored, onClick, index }: LabObjectProps
         <img
           src={object.image}
           alt={object.title}
-          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.02] group-hover:brightness-110"
+          className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.02] brightness-75 hover:brightness-100 contrast-125"
         />
         
         {/* Subtle overlay on hover */}

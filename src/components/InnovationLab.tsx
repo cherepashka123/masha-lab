@@ -68,7 +68,7 @@ const labObjects: LabObjectData[] = [
   }
 ];
 
-export const InnovationLab = () => {
+export const InnovationLab = ({ preselectedObjectId }: { preselectedObjectId?: string | null } = {}) => {
   const [selectedObject, setSelectedObject] = useState<LabObjectData | null>(null);
   const [exploredObjects, setExploredObjects] = useState<Set<string>>(new Set());
   const [currentStage, setCurrentStage] = useState(1);
@@ -81,6 +81,17 @@ export const InnovationLab = () => {
     const maxStage = Math.max(currentStage, object.stage);
     setCurrentStage(maxStage);
   };
+
+  // Handle preselected object from video
+  useEffect(() => {
+    if (preselectedObjectId) {
+      const preselectedObject = labObjects.find(obj => obj.id === preselectedObjectId);
+      if (preselectedObject) {
+        setSelectedObject(preselectedObject);
+        setExploredObjects(prev => new Set([...prev, preselectedObjectId]));
+      }
+    }
+  }, [preselectedObjectId]);
 
   // Calculate progress through design thinking stages
   useEffect(() => {

@@ -1,14 +1,24 @@
-import { useState } from "react";
-import { VideoIntro } from "@/components/VideoIntro";
+import { useState, useEffect } from "react";
+import { InteractiveVideoIntro } from "@/components/InteractiveVideoIntro";
 import { InnovationLab } from "@/components/InnovationLab";
 
 const Index = () => {
   const [showLab, setShowLab] = useState(false);
+  const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
+
+  const handleObjectSelect = (objectId: string) => {
+    setSelectedObjectId(objectId);
+  };
 
   return (
     <>
-      {!showLab && <VideoIntro onVideoEnd={() => setShowLab(true)} />}
-      {showLab && <InnovationLab />}
+      {!showLab && (
+        <InteractiveVideoIntro 
+          onVideoEnd={() => setShowLab(true)} 
+          onObjectSelect={handleObjectSelect}
+        />
+      )}
+      {showLab && <InnovationLab preselectedObjectId={selectedObjectId} />}
     </>
   );
 };
