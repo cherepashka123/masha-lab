@@ -27,6 +27,7 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
   };
 
   const handleVideoError = () => {
+    console.log("Video failed to load: /intro.mp4");
     setVideoError(true);
     // Auto-advance after 3 seconds if video fails
     setTimeout(() => onVideoEnd(), 3000);
@@ -34,27 +35,49 @@ export const VideoIntro = ({ onVideoEnd }: VideoIntroProps) => {
 
   if (videoError) {
     return (
-      <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-        <div className="text-center space-y-8 animate-fade-in">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl font-thin text-white tracking-[0.2em]">
-              MASHA'S
-            </h1>
-            <div className="w-24 h-px bg-white/30 mx-auto" />
-            <h2 className="text-xl md:text-2xl font-light text-white/80 tracking-[0.3em]">
+      <div className="fixed inset-0 z-50 bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="text-center space-y-12 animate-fade-in px-8">
+          <div className="space-y-6">
+            <div className="relative">
+              <h1 className="text-5xl md:text-7xl font-thin text-white tracking-[0.3em] relative">
+                MASHA
+              </h1>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            </div>
+            <h2 className="text-xl md:text-3xl font-extralight text-white/90 tracking-[0.4em]">
               INNOVATION LAB
             </h2>
           </div>
-          <div className="text-sm text-white/60 font-light tracking-wide">
-            Exploring the intersection of psychology, technology & business
+          
+          <div className="space-y-4">
+            <p className="text-base md:text-lg text-white/70 font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
+              Exploring the intersection of psychology, technology & business
+            </p>
+            <p className="text-sm text-white/50 font-light tracking-wide">
+              A journey through design thinking & innovation
+            </p>
+          </div>
+          
+          <div className="flex flex-col items-center space-y-4">
+            <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center animate-pulse">
+              <div className="w-8 h-8 rounded-full bg-white/10" />
+            </div>
+            <p className="text-xs text-white/40 tracking-wider">
+              PREPARING EXPERIENCE
+            </p>
           </div>
         </div>
         
         <button
           onClick={handleSkip}
-          className="absolute bottom-8 right-8 text-white/60 hover:text-white text-sm font-light tracking-wider transition-colors duration-300"
+          className="absolute bottom-8 right-8 group flex items-center space-x-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full hover:bg-white/10 transition-all duration-500"
         >
-          ENTER LAB →
+          <span className="text-white/60 group-hover:text-white text-sm font-light tracking-wider">
+            ENTER LAB
+          </span>
+          <div className="w-5 h-5 rounded-full border border-white/40 flex items-center justify-center group-hover:border-white transition-colors">
+            <div className="w-0 h-0 border-l-[6px] border-l-white/60 border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent group-hover:border-l-white ml-0.5" />
+          </div>
         </button>
       </div>
     );
