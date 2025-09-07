@@ -67,17 +67,34 @@ export const InteractiveVideoIntro = ({ onVideoEnd, onObjectSelect }: Interactiv
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+      console.log("Video ref not available");
+      return;
+    }
+
+    console.log("Setting up video event listeners");
 
     const handleLoadedData = () => {
       console.log("Video loaded successfully");
       setVideoState('playing');
       
-      // Try to play
-      video.play().catch(err => {
+      // Try to play with better error handling
+      video.play().then(() => {
+        console.log("Video started playing successfully");
+      }).catch(err => {
         console.log("Autoplay failed:", err);
-        freezeLastFrame();
+        // If autoplay fails, show controls or freeze frame
+        setVideoState('frozen');
+        setShowHotspots(true);
       });
+    };
+
+    const handleLoadStart = () => {
+      console.log("Video load started");
+    };
+
+    const handleCanPlay = () => {
+      console.log("Video can play");
     };
 
     const handleEnded = () => {
@@ -87,6 +104,8 @@ export const InteractiveVideoIntro = ({ onVideoEnd, onObjectSelect }: Interactiv
 
     const handleError = (e: any) => {
       console.log("Video error:", e);
+      console.log("Video src:", video.src);
+      console.log("Video readyState:", video.readyState);
       setVideoState('error');
       // Show static background with hotspots after 2 seconds
       setTimeout(() => {
@@ -102,13 +121,27 @@ export const InteractiveVideoIntro = ({ onVideoEnd, onObjectSelect }: Interactiv
       }
     };
 
+    video.addEventListener('loadstart', handleLoadStart);
     video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('error', handleError);
     video.addEventListener('timeupdate', handleTimeUpdate);
 
+    // Try to load the video
+    video.load();
+
+    // Fallback timer - if video doesn't load in 5 seconds, show fallback
+    const fallbackTimer = setTimeout(() => {
+      console.log("Video loading timeout - showing fallback");
+      setVideoState('error');
+    }, 5000);
+
     return () => {
+      clearTimeout(fallbackTimer);
+      video.removeEventListener('loadstart', handleLoadStart);
       video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('error', handleError);
       video.removeEventListener('timeupdate', handleTimeUpdate);
@@ -201,11 +234,16 @@ export const InteractiveVideoIntro = ({ onVideoEnd, onObjectSelect }: Interactiv
       <video
         ref={videoRef}
         className={`w-full h-full object-cover ${videoState === 'frozen' ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}
+        autoPlay
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
+        controls={false}
       >
         <source src="/intro.mp4" type="video/mp4" />
+        <source src="./intro.mp4" type="video/mp4" />
+        <source src="intro.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
 
       {/* Canvas for frozen frame */}
