@@ -20,45 +20,78 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 flex items-center justify-center">
       <div className="relative group">
-        {/* Modern Tech Icon */}
+        {/* Main Glowing Star */}
         <div 
-          className="relative w-20 h-20 bg-gradient-to-br from-primary via-accent to-secondary rounded-2xl shadow-2xl cursor-pointer transition-all duration-500 hover:scale-110 hover:shadow-3xl hover:rotate-3 border border-border/20 backdrop-blur-sm"
+          className="relative w-8 h-8 cursor-pointer transition-all duration-500 hover:scale-125"
           onClick={() => setIsLadderDropped(true)}
         >
-          {/* Circuit pattern overlay */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-2 left-2 w-1 h-1 bg-accent rounded-full"></div>
-            <div className="absolute top-2 right-2 w-1 h-1 bg-accent rounded-full"></div>
-            <div className="absolute bottom-2 left-2 w-1 h-1 bg-accent rounded-full"></div>
-            <div className="absolute bottom-2 right-2 w-1 h-1 bg-accent rounded-full"></div>
-            <div className="absolute top-3 left-3 right-3 h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
-            <div className="absolute bottom-3 left-3 right-3 h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
-          </div>
-          
-          {/* Central AI symbol */}
+          {/* Central star */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-foreground/80 to-accent/80 flex items-center justify-center shadow-inner">
-              <div className="w-4 h-4 bg-gradient-to-br from-primary to-secondary rounded-sm rotate-45 shadow-sm"></div>
+            <div className="w-6 h-6 relative">
+              {/* Star shape using CSS clips */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent via-primary to-secondary rounded-full animate-pulse shadow-lg shadow-primary/50"></div>
+              <div className="absolute inset-1 bg-gradient-to-br from-accent/80 to-primary/80 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+              <div className="absolute inset-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
           </div>
 
-          {/* Pulsing ring */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-accent opacity-20 animate-pulse"></div>
+          {/* Sparkle effects */}
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-accent rounded-full opacity-60 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+          <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-primary rounded-full opacity-40 animate-pulse" style={{ animationDelay: '0.8s' }}></div>
         </div>
 
-        {/* Interactive Connection Line */}
-        <div className={cn(
-          "absolute top-20 left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-primary via-accent to-secondary transition-all duration-2000 ease-out",
-          isLadderDropped ? "h-32 opacity-100" : "h-0 opacity-0"
-        )}>
-          {/* Data nodes */}
-          {Array.from({ length: 6 }).map((_, index) => (
+        {/* Constellation Ladder (appears on hover) */}
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-1000 ease-out pointer-events-none">
+          {/* Ladder stars */}
+          {Array.from({ length: 8 }).map((_, index) => (
             <div 
-              key={index} 
-              className="absolute w-2 h-2 bg-accent rounded-full -left-0.75 shadow-lg animate-pulse"
+              key={index}
+              className="absolute flex items-center justify-center transition-all duration-500 ease-out"
               style={{ 
-                top: `${(index + 1) * 20}px`,
-                animationDelay: `${index * 0.2}s`
+                top: `${index * 16}px`,
+                left: index % 2 === 0 ? '-8px' : '8px',
+                animationDelay: `${index * 0.1}s`
+              }}
+            >
+              {/* Left star */}
+              <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse opacity-80 -ml-2"></div>
+              {/* Connection line */}
+              <div className="w-4 h-px bg-gradient-to-r from-accent/50 to-primary/50"></div>
+              {/* Right star */}
+              <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse opacity-80 -mr-2"></div>
+            </div>
+          ))}
+          
+          {/* Treehouse silhouette stars at top */}
+          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+            <div className="relative w-12 h-8">
+              {/* Roof stars */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-secondary rounded-full animate-pulse"></div>
+              <div className="absolute top-1 left-2 w-1 h-1 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+              <div className="absolute top-1 right-2 w-1 h-1 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+              {/* House body stars */}
+              <div className="absolute top-3 left-1 w-1 h-1 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+              <div className="absolute top-3 right-1 w-1 h-1 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.7s' }}></div>
+              <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-secondary rounded-full animate-pulse" style={{ animationDelay: '0.9s' }}></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Burst Animation and Chat Button */}
+        <div className={cn(
+          "absolute top-0 left-1/2 transform -translate-x-1/2 transition-all duration-1000 ease-out",
+          isLadderDropped ? "opacity-100" : "opacity-0"
+        )}>
+          {/* Burst stars */}
+          {isLadderDropped && Array.from({ length: 12 }).map((_, index) => (
+            <div 
+              key={index}
+              className="absolute w-1 h-1 bg-accent rounded-full animate-ping"
+              style={{ 
+                top: `${Math.sin(index * 30 * Math.PI / 180) * 40 + 20}px`,
+                left: `${Math.cos(index * 30 * Math.PI / 180) * 40 + 20}px`,
+                animationDelay: `${index * 0.1}s`,
+                animationDuration: '2s'
               }}
             />
           ))}
@@ -66,18 +99,18 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
           {/* Chat Interface Button */}
           <div 
             className={cn(
-              "absolute cursor-pointer transition-all duration-700 ease-out group/btn",
+              "absolute cursor-pointer transition-all duration-700 ease-out",
               isLadderDropped 
-                ? "w-40 h-14 -left-20 top-28 rounded-2xl bg-gradient-to-r from-primary via-accent to-secondary flex items-center justify-center text-primary-foreground font-semibold text-sm shadow-2xl hover:scale-105 hover:shadow-3xl border border-border/20 backdrop-blur-sm" 
-                : "w-2 h-2 -left-0.75 top-28 bg-accent rounded-full opacity-0"
+                ? "w-32 h-12 -left-16 top-16 rounded-2xl bg-gradient-to-r from-primary/90 via-accent/90 to-secondary/90 flex items-center justify-center text-primary-foreground font-medium text-sm shadow-2xl hover:scale-105 hover:shadow-primary/50 border border-accent/30 backdrop-blur-sm" 
+                : "w-0 h-0 opacity-0"
             )}
             onClick={onOpenChat}
           >
             {isLadderDropped && (
               <div className="flex items-center gap-2 animate-fade-in-up">
-                <div className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse"></div>
-                <span>Click to Connect</span>
-                <div className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></div>
+                <span>Click to Open</span>
+                <div className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
               </div>
             )}
           </div>
