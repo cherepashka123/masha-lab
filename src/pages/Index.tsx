@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { InteractiveVideoIntro } from "@/components/InteractiveVideoIntro";
 import { InnovationLab } from "@/components/InnovationLab";
+import { TreehouseChatbot } from "@/components/TreehouseChatbot";
 
 const Index = () => {
   const [showLab, setShowLab] = useState(false);
@@ -19,6 +20,7 @@ const Index = () => {
         />
       )}
       {showLab && <InnovationLab preselectedObjectId={selectedObjectId} />}
+      <TreehouseChatbot />
     </>
   );
 };
