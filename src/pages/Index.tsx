@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { InteractiveVideoIntro } from "@/components/InteractiveVideoIntro";
-import { InnovationLab } from "@/components/InnovationLab";
+import { TreehouseLadder } from "@/components/TreehouseLadder";
 import { TreehouseChatbot } from "@/components/TreehouseChatbot";
 
 const Index = () => {
-  const [showLab, setShowLab] = useState(false);
-  const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
+  const [showLadder, setShowLadder] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
-  const handleObjectSelect = (objectId: string) => {
-    setSelectedObjectId(objectId);
+  const handleOpenChat = () => {
+    setIsChatOpen(true);
   };
 
   return (
     <>
-      {!showLab && (
+      {!showLadder && (
         <InteractiveVideoIntro 
-          onVideoEnd={() => setShowLab(true)} 
-          onObjectSelect={handleObjectSelect}
+          onVideoEnd={() => setShowLadder(true)} 
+          onObjectSelect={() => {}} // No longer needed
         />
       )}
-      {showLab && <InnovationLab preselectedObjectId={selectedObjectId} />}
-      <TreehouseChatbot />
+      {showLadder && <TreehouseLadder onOpenChat={handleOpenChat} />}
+      {isChatOpen && <TreehouseChatbot />}
     </>
   );
 };

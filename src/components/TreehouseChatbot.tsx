@@ -8,8 +8,7 @@ interface Message {
 }
 
 export const TreehouseChatbot = () => {
-  const [isLadderDropped, setIsLadderDropped] = useState(false);
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(true); // Auto-open when component mounts
   const [messages, setMessages] = useState<Message[]>([
     {
       text: "Hi! I'm Maria's AI assistant. Ask me anything about her background, education, work experience, projects, skills, interests, achievements, or personal stories!",
@@ -28,14 +27,6 @@ export const TreehouseChatbot = () => {
     "What are Maria's interests?"
   ];
 
-  useEffect(() => {
-    // Drop ladder after 2 seconds
-    const timer = setTimeout(() => {
-      setIsLadderDropped(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleSendMessage = async (message?: string) => {
     const question = message || inputValue.trim();
@@ -67,49 +58,6 @@ export const TreehouseChatbot = () => {
 
   return (
     <>
-      {/* Treehouse Widget */}
-      <div className="fixed bottom-8 right-8 z-50">
-        {/* Treehouse */}
-        <div 
-          className="relative w-20 h-15 bg-gradient-to-br from-amber-700 to-amber-800 rounded-t-2xl shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl"
-          onClick={() => setIsLadderDropped(true)}
-        >
-          {/* Roof */}
-          <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 border-r-3 border-b-4 border-l-transparent border-r-transparent border-b-amber-700" />
-          
-          {/* Windows */}
-          <div className="absolute top-3 left-3 w-3 h-3 bg-sky-200 border-2 border-amber-900 rounded-full" />
-          <div className="absolute top-3 right-3 w-3 h-3 bg-sky-200 border-2 border-amber-900 rounded-full" />
-          
-          {/* Door */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2.5 h-4 bg-amber-900 rounded-t-lg" />
-        </div>
-
-        {/* Rope Ladder */}
-        <div className={cn(
-          "absolute top-15 left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-amber-700 to-amber-900 transition-all duration-1500 ease-in-out",
-          isLadderDropped ? "h-30" : "h-0"
-        )}>
-          {/* Rungs */}
-          {[10, 20, 30, 40, 50, 60, 70].map((top, index) => (
-            <div key={index} className={cn("absolute w-4 h-0.5 bg-amber-700 -left-2 rounded-sm shadow-sm")} style={{ top: `${top}px` }} />
-          ))}
-          
-          {/* Chat Button */}
-          <div 
-            className={cn(
-              "absolute cursor-pointer transition-all duration-500 z-10",
-              isLadderDropped 
-                ? "w-20 h-9 -left-10 top-28 rounded-2xl bg-gradient-to-r from-primary to-accent flex items-center justify-center text-white font-bold text-xs shadow-lg hover:scale-110" 
-                : "w-4 h-0.5 -left-2 top-28 bg-gradient-to-r from-primary to-accent rounded-sm"
-            )}
-            onClick={() => setIsChatOpen(true)}
-          >
-            {isLadderDropped && <span>Ask Maria</span>}
-          </div>
-        </div>
-      </div>
-
       {/* Chat Panel */}
       {isChatOpen && (
         <div className="fixed bottom-5 right-5 w-90 h-125 bg-background border border-border rounded-3xl shadow-2xl z-50 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-400">
