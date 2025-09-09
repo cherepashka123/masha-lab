@@ -19,11 +19,13 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
 
   return (
     <div className="min-h-screen w-full bg-white relative overflow-hidden cursor-pointer" onClick={() => setIsLadderDropped(true)}>
-      {/* Invisible clickable center area for better UX */}
+      {/* Clickable center area with visible text */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-64 h-64 hover:bg-gray-50 transition-all duration-500 flex items-center justify-center group">
-          {/* Subtle pulse indicator in center */}
-          <div className="w-4 h-4 bg-gray-300 rounded-full animate-pulse group-hover:w-6 group-hover:h-6 group-hover:bg-gray-400 transition-all duration-500"></div>
+        <div className="text-center cursor-pointer group">
+          <div className="w-4 h-4 bg-gray-300 rounded-full animate-pulse group-hover:w-6 group-hover:h-6 group-hover:bg-gray-400 transition-all duration-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 font-light text-lg tracking-wide group-hover:text-black transition-all duration-300">
+            Click to Enter Chat
+          </p>
         </div>
       </div>
 
