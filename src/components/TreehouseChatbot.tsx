@@ -60,12 +60,12 @@ export const TreehouseChatbot = () => {
     <>
       {/* Chat Panel */}
       {isChatOpen && (
-        <div className="fixed bottom-5 right-5 w-90 h-125 bg-background border border-border rounded-3xl shadow-2xl z-50 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-400">
+        <div className="fixed bottom-8 right-8 w-96 h-[32rem] bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-400">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-5 text-center font-bold text-lg relative">
+          <div className="bg-white/5 backdrop-blur-sm text-white/90 p-4 text-center font-light text-base relative border-b border-white/10">
             Ask Maria Anything
             <button 
-              className="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-white/20 flex items-center justify-center text-xl"
+              className="absolute top-3 right-3 w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center text-white/60 hover:text-white/90 transition-all duration-300"
               onClick={() => setIsChatOpen(false)}
             >
               ×
@@ -73,20 +73,20 @@ export const TreehouseChatbot = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-5 overflow-y-auto bg-muted/30 space-y-4">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3">
             {messages.map((message, index) => (
               <div key={index} className={cn(
-                "max-w-[80%] p-3 rounded-2xl text-sm",
+                "max-w-[85%] p-3 rounded-2xl text-sm",
                 message.sender === 'user' 
-                  ? "ml-auto bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-br-md"
-                  : "bg-background border border-border rounded-bl-md"
+                  ? "ml-auto bg-white/10 backdrop-blur-sm text-white/90 border border-white/20 rounded-br-sm"
+                  : "bg-white/5 backdrop-blur-sm text-white/80 border border-white/10 rounded-bl-sm"
               )}>
                 {message.text}
               </div>
             ))}
             
             {isTyping && (
-              <div className="max-w-[80%] p-3 rounded-2xl rounded-bl-md bg-background border border-border text-sm">
+              <div className="max-w-[85%] p-3 rounded-2xl rounded-bl-sm bg-white/5 backdrop-blur-sm border border-white/10 text-sm text-white/60">
                 <em>Maria is typing...</em>
               </div>
             )}
@@ -97,7 +97,7 @@ export const TreehouseChatbot = () => {
                 {starterQuestions.map((question, index) => (
                   <button
                     key={index}
-                    className="block w-full text-left p-2 text-xs bg-gradient-to-r from-secondary to-accent/20 text-secondary-foreground rounded-xl hover:translate-x-1 transition-all duration-300 hover:shadow-md"
+                    className="block w-full text-left p-3 text-xs bg-white/5 hover:bg-white/10 text-white/70 hover:text-white/90 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
                     onClick={() => handleStarterQuestion(question)}
                   >
                     {question}
@@ -108,19 +108,19 @@ export const TreehouseChatbot = () => {
           </div>
 
           {/* Input */}
-          <div className="p-5 bg-background border-t border-border">
-            <div className="flex gap-2">
+          <div className="p-4 bg-white/5 backdrop-blur-sm border-t border-white/10">
+            <div className="flex gap-3">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder="Ask me anything about Maria..."
-                className="flex-1 px-4 py-3 border border-input rounded-full outline-none focus:ring-2 focus:ring-primary text-sm"
+                className="flex-1 px-4 py-2.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full outline-none focus:ring-2 focus:ring-white/30 text-sm text-white/90 placeholder-white/50"
               />
               <button
                 onClick={() => handleSendMessage()}
-                className="px-5 py-3 bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-full font-bold hover:scale-105 transition-all duration-300 hover:shadow-lg"
+                className="px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white/90 rounded-full font-light hover:scale-105 transition-all duration-300 backdrop-blur-sm border border-white/20"
               >
                 Send
               </button>
