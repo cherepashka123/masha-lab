@@ -19,23 +19,11 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
 
   return (
     <div className="min-h-screen w-full bg-white relative overflow-hidden cursor-pointer" onClick={() => setIsLadderDropped(true)}>
-      {/* Full Screen Orb Background */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <img 
-          src="/Maria_Cherep_A_glowing_constellation_orb_designed_as_a_website_button,_surreal_3416095e-4f2a-4768-8fd4-854db8f10ddc.png"
-          alt="Constellation Orb"
-          className="w-full h-full object-cover transition-all duration-700 ease-out hover:scale-105"
-        />
-        
-        {/* Subtle overlay for better interaction feedback */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background/10 hover:from-primary/5 hover:via-transparent hover:to-background/5 transition-all duration-700"></div>
-      </div>
-
       {/* Invisible clickable center area for better UX */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-64 h-64 rounded-full hover:bg-white/5 transition-all duration-500 flex items-center justify-center group">
+        <div className="w-64 h-64 hover:bg-gray-50 transition-all duration-500 flex items-center justify-center group">
           {/* Subtle pulse indicator in center */}
-          <div className="w-4 h-4 bg-white/20 rounded-full animate-pulse group-hover:w-6 group-hover:h-6 group-hover:bg-white/30 transition-all duration-500"></div>
+          <div className="w-4 h-4 bg-gray-300 rounded-full animate-pulse group-hover:w-6 group-hover:h-6 group-hover:bg-gray-400 transition-all duration-500"></div>
         </div>
       </div>
 
