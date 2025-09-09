@@ -16,8 +16,8 @@ export const AboutSection = ({ scrollY }: AboutSectionProps) => {
           opacity: fadeInProgress
         }}
       >
-        <h2 className="text-6xl md:text-8xl font-bold tracking-tight text-foreground mb-12 drop-shadow-lg">
-          Masha's Innovation Lab
+        <h2 className="text-lg font-light tracking-[0.2em] text-foreground/60 mb-16 uppercase">
+          Welcome to my treehouse
         </h2>
         <div className="grid md:grid-cols-2 gap-24 mt-24">
           <div 

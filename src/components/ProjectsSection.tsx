@@ -81,7 +81,7 @@ const personalProjects = [
     title: "Threadress",
     category: "Fashion Tech",
     description: "AI-powered fashion discovery and styling platform",
-    media: "/A_minimalistic_hyperrealistic_202509091707.mp4",
+    media: "/A_minimalistic_hyperrealistic_202509091750.mp4",
     type: "video" as const,
     year: "2024",
     route: "/projects/threadress"
