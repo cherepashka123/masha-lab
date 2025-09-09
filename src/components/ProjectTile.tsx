@@ -5,7 +5,8 @@ interface Project {
   title: string;
   category: string;
   description: string;
-  image: string;
+  media: string | null;
+  type: 'video' | 'image' | 'placeholder';
   year: string;
 }
 
@@ -37,34 +38,68 @@ export const ProjectTile = ({ project, index, scrollY, sectionStart }: ProjectTi
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Container */}
-      <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-muted rounded-sm">
-        <img
-          src={project.image}
-          alt={project.title}
-          className={`w-full h-full object-cover transition-all duration-700 ease-out ${
-            isHovered ? 'scale-110 brightness-110' : 'scale-100'
-          }`}
-        />
-        
-        {/* Hover Overlay */}
-        <div className={`absolute inset-0 bg-black/20 transition-opacity duration-500 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`} />
-        
-        {/* Floating Elements on Hover */}
-        {isHovered && (
-          <div className="absolute top-4 right-4">
-            <div className="flex space-x-1">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="w-1 h-1 bg-white rounded-full animate-pulse"
-                  style={{ animationDelay: `${i * 0.2}s` }}
-                />
-              ))}
+      {/* Media Container */}
+      <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-muted/20 rounded-lg border border-muted/40">
+        {project.type === 'video' && project.media ? (
+          <video
+            src={project.media}
+            className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+              isHovered ? 'scale-110 brightness-110' : 'scale-100'
+            }`}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : project.type === 'image' && project.media ? (
+          <img
+            src={project.media}
+            alt={project.title}
+            className={`w-full h-full object-cover transition-all duration-700 ease-out ${
+              isHovered ? 'scale-110 brightness-110' : 'scale-100'
+            }`}
+          />
+        ) : (
+          <div className={`w-full h-full flex items-center justify-center transition-all duration-700 ease-out ${
+            isHovered ? 'scale-105' : 'scale-100'
+          }`}>
+            <div className="text-center space-y-2">
+              <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="w-6 h-6 bg-primary/30 rounded-sm" />
+              </div>
+              <p className="text-xs text-muted-foreground">Media placeholder</p>
             </div>
           </div>
+        )}
+        
+        {/* Immersive Hover Overlay */}
+        <div className={`absolute inset-0 transition-all duration-700 ${
+          isHovered 
+            ? 'bg-gradient-to-br from-primary/20 via-transparent to-primary/10 opacity-100' 
+            : 'opacity-0'
+        }`} />
+        
+        {/* Floating particles on hover */}
+        {isHovered && (
+          <>
+            <div className="absolute top-4 right-4">
+              <div className="flex space-x-1">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 h-1.5 bg-white/80 rounded-full animate-bounce"
+                    style={{ 
+                      animationDelay: `${i * 0.3}s`,
+                      animationDuration: '1.5s'
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="absolute bottom-4 left-4">
+              <div className="w-8 h-px bg-white/60 animate-pulse" />
+            </div>
+          </>
         )}
       </div>
 

@@ -6,55 +6,61 @@ interface ProjectsSectionProps {
 
 const professionalProjects = [
   {
-    id: "data-dashboard",
-    title: "Data Analytics Platform",
-    category: "UX Strategy",
-    description: "Transforming complex data into intuitive insights",
-    image: "/src/assets/data-dashboard.jpg",
+    id: "threadress",
+    title: "Threadress",
+    category: "Fashion Tech",
+    description: "AI-powered fashion discovery platform",
+    media: "/A_minimalistic_hyperrealistic_202509091707.mp4",
+    type: "video" as const,
     year: "2024"
   },
   {
-    id: "fashion-tech",
-    title: "Fashion Tech Innovation",
-    category: "Product Design",
-    description: "Bridging traditional fashion with digital experiences",
-    image: "/src/assets/fashion-tech.jpg",
+    id: "neural-research",
+    title: "Neural Research",
+    category: "Psychology",
+    description: "Human-computer interaction research",
+    media: null,
+    type: "placeholder" as const,
+    year: "2024"
+  },
+  {
+    id: "strategy-consulting",
+    title: "Strategy Consulting",
+    category: "Business",
+    description: "Digital transformation consulting",
+    media: null,
+    type: "placeholder" as const,
     year: "2023"
-  },
-  {
-    id: "neural-brain",
-    title: "Neural Interface Design",
-    category: "Research",
-    description: "Exploring human-computer interaction through psychology",
-    image: "/src/assets/neural-brain.jpg",
-    year: "2024"
   }
 ];
 
 const personalProjects = [
   {
-    id: "treehouse",
+    id: "treehouse-digital",
     title: "Digital Treehouse",
-    category: "Interactive Experience",
-    description: "A space for reflection and philosophical exploration",
-    image: "/src/assets/nyc-hologram.jpg",
+    category: "Interactive Space",
+    description: "A philosophical exploration platform",
+    media: null,
+    type: "placeholder" as const,
     year: "2024"
   },
   {
-    id: "constellation",
-    title: "Constellation Narratives",
+    id: "ukrainian-narratives",
+    title: "Ukrainian Narratives",
+    category: "Cultural Heritage",
+    description: "Preserving cultural stories and memories",
+    media: null,
+    type: "placeholder" as const,
+    year: "2024"
+  },
+  {
+    id: "constellation-stories",
+    title: "Constellation Stories",
     category: "Experimental",
-    description: "Connecting stories through interactive constellations",
-    image: "/public/Maria_Cherep_A_glowing_constellation_orb_designed_as_a_website_button,_surreal_3416095e-4f2a-4768-8fd4-854db8f10ddc.png",
+    description: "Interactive storytelling through constellations",
+    media: null,
+    type: "placeholder" as const,
     year: "2023"
-  },
-  {
-    id: "ukrainian-stories",
-    title: "Cultural Memory Project",
-    category: "Social Impact",
-    description: "Preserving and sharing Ukrainian cultural narratives",
-    image: "/src/assets/ukrainian-flag.jpg",
-    year: "2024"
   }
 ];
 

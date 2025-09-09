@@ -21,18 +21,25 @@ export const VideoHero = ({ scrollY }: VideoHeroProps) => {
     }
   }, []);
 
-  // Calculate parallax effect
-  const videoTransform = Math.max(-scrollY * 0.5, -window.innerHeight);
+  // Calculate parallax effect and floating video effect
+  const scrollProgress = scrollY / window.innerHeight;
+  const videoScale = Math.max(1 - scrollProgress * 0.8, 0.2);
+  const videoTransformY = scrollY * 0.5;
+  const videoTransformX = scrollProgress > 0.5 ? (scrollProgress - 0.5) * window.innerWidth * 0.6 : 0;
   const overlayOpacity = Math.min(scrollY / (window.innerHeight * 0.8), 1);
+  
+  // Micro animation for welcome message
+  const showWelcome = scrollY > 50 && scrollY < window.innerHeight * 0.3;
 
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Video Background */}
+      {/* Video Background with floating effect */}
       <div 
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full origin-center"
         style={{
-          transform: `translateY(${videoTransform}px)`,
-          transition: 'transform 0.1s ease-out'
+          transform: `translateY(${videoTransformY}px) translateX(${videoTransformX}px) scale(${videoScale})`,
+          transition: 'transform 0.1s ease-out',
+          borderRadius: scrollProgress > 0.3 ? '12px' : '0px'
         }}
       >
         <video
@@ -64,15 +71,29 @@ export const VideoHero = ({ scrollY }: VideoHeroProps) => {
           }}
         >
           <h1 className="text-6xl md:text-8xl font-light tracking-wider mb-8 animate-fade-in-up">
-            MASHA
+            Masha's
           </h1>
           <p className="text-xl md:text-2xl font-light tracking-widest opacity-80 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-            INNOVATION LAB
+            Innovation Lab
           </p>
           <div className="mt-12 animate-fade-in-up" style={{ animationDelay: '1s' }}>
             <div className="w-px h-16 bg-white/50 mx-auto animate-pulse" />
             <p className="text-sm tracking-widest mt-4 opacity-60">SCROLL TO EXPLORE</p>
           </div>
+          
+          {/* Micro animation welcome message */}
+          {showWelcome && (
+            <div 
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              style={{
+                animation: 'fade-in 0.8s ease-out forwards'
+              }}
+            >
+              <p className="text-lg tracking-widest text-white/80 animate-pulse">
+                welcome to my treehouse
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </section>
