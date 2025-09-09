@@ -1,4 +1,12 @@
 import { ProjectTile } from "./ProjectTile";
+import dressxIcon from "@/assets/dressx-icon.png";
+import devolatechIcon from "@/assets/devolatech-icon.png";
+import dragonCapitalIcon from "@/assets/dragon-capital-icon.png";
+import riseBarclaysIcon from "@/assets/rise-barclays-icon.png";
+import nyuIcon from "@/assets/nyu-icon.png";
+import ukraineUsIcon from "@/assets/ukraine-us-icon.png";
+import nakedConfidenceIcon from "@/assets/naked-confidence-icon.png";
+import tabletochkiIcon from "@/assets/tabletochki-icon.png";
 
 interface ProjectsSectionProps {
   scrollY: number;
@@ -6,61 +14,97 @@ interface ProjectsSectionProps {
 
 const professionalProjects = [
   {
-    id: "threadress",
-    title: "Threadress",
+    id: "dressx",
+    title: "DRESSX",
     category: "Fashion Tech",
-    description: "AI-powered fashion discovery platform",
-    media: "/A_minimalistic_hyperrealistic_202509091707.mp4",
-    type: "video" as const,
-    year: "2024"
+    description: "Digital fashion platform revolutionizing virtual clothing",
+    media: dressxIcon,
+    type: "image" as const,
+    year: "2024",
+    route: "/projects/dressx"
   },
   {
-    id: "neural-research",
-    title: "Neural Research",
-    category: "Psychology",
-    description: "Human-computer interaction research",
-    media: null,
-    type: "placeholder" as const,
-    year: "2024"
+    id: "devolatech",
+    title: "DevolaTech",
+    category: "Technology",
+    description: "Technology consulting and development solutions",
+    media: devolatechIcon,
+    type: "image" as const,
+    year: "2024",
+    route: "/projects/devolatech"
   },
   {
-    id: "strategy-consulting",
-    title: "Strategy Consulting",
-    category: "Business",
-    description: "Digital transformation consulting",
-    media: null,
-    type: "placeholder" as const,
-    year: "2023"
+    id: "dragon-capital",
+    title: "Dragon Capital",
+    category: "Finance",
+    description: "Investment management and financial services",
+    media: dragonCapitalIcon,
+    type: "image" as const,
+    year: "2023",
+    route: "/projects/dragon-capital"
+  },
+  {
+    id: "rise-barclays",
+    title: "Rise by Barclays",
+    category: "Banking",
+    description: "Digital banking innovation and financial solutions",
+    media: riseBarclaysIcon,
+    type: "image" as const,
+    year: "2023",
+    route: "/projects/rise-barclays"
+  },
+  {
+    id: "nyu",
+    title: "NYU",
+    category: "Education",
+    description: "Coursework: Tech Product Management, Digital Business Strategy, Management & Organizations, Intro to Marketing, Social Media Strategy, Programming in Python, Statistics",
+    media: nyuIcon,
+    type: "image" as const,
+    year: "2022",
+    route: "/projects/nyu"
   }
 ];
 
 const personalProjects = [
   {
-    id: "treehouse-digital",
-    title: "Digital Treehouse",
-    category: "Interactive Space",
-    description: "A philosophical exploration platform",
-    media: null,
-    type: "placeholder" as const,
-    year: "2024"
+    id: "ukraine-us",
+    title: "Ukraine → Life in the U.S.",
+    category: "Journey",
+    description: "A personal narrative of cultural transition and adaptation",
+    media: ukraineUsIcon,
+    type: "image" as const,
+    year: "2024",
+    route: "/projects/ukraine-us"
   },
   {
-    id: "ukrainian-narratives",
-    title: "Ukrainian Narratives",
-    category: "Cultural Heritage",
-    description: "Preserving cultural stories and memories",
-    media: null,
-    type: "placeholder" as const,
-    year: "2024"
+    id: "threadress",
+    title: "Threadress",
+    category: "Fashion Tech",
+    description: "AI-powered fashion discovery and styling platform",
+    media: "/A_minimalistic_hyperrealistic_202509091707.mp4",
+    type: "video" as const,
+    year: "2024",
+    route: "/projects/threadress"
   },
   {
-    id: "constellation-stories",
-    title: "Constellation Stories",
-    category: "Experimental",
-    description: "Interactive storytelling through constellations",
-    media: null,
-    type: "placeholder" as const,
-    year: "2023"
+    id: "naked-confidence",
+    title: "Naked Confidence",
+    category: "Wellness",
+    description: "Empowerment platform for body positivity and self-confidence",
+    media: nakedConfidenceIcon,
+    type: "image" as const,
+    year: "2024",
+    route: "/projects/naked-confidence"
+  },
+  {
+    id: "tabletochki",
+    title: "Tabletochki",
+    category: "Healthcare",
+    description: "Digital health platform for medication management",
+    media: tabletochkiIcon,
+    type: "image" as const,
+    year: "2023",
+    route: "/projects/tabletochki"
   }
 ];
 
@@ -72,33 +116,28 @@ export const ProjectsSection = ({ scrollY }: ProjectsSectionProps) => {
   return (
     <section className="min-h-screen bg-background py-32 px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
-        <div 
-          className="text-center mb-24"
-          style={{
-            transform: `translateY(${-titleParallax}px)`,
-            opacity: fadeInProgress
-          }}
-        >
-          <h2 className="text-5xl md:text-7xl font-light tracking-wide text-foreground mb-8">
-            Selected Works
-          </h2>
-          <div className="w-24 h-px bg-foreground/20 mx-auto" />
-        </div>
-
         {/* Professional Projects */}
-        <div className="mb-32">
-          <h3 className="text-2xl font-light tracking-widest text-muted-foreground uppercase mb-16 text-center">
-            Professional
-          </h3>
-          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-12">
+        <div className="mb-40">
+          <div 
+            className="text-center mb-20"
+            style={{
+              transform: `translateY(${-titleParallax}px)`,
+              opacity: fadeInProgress
+            }}
+          >
+            <h3 className="text-4xl md:text-6xl font-light tracking-wide text-foreground mb-4">
+              Professional
+            </h3>
+            <div className="w-16 h-px bg-foreground/20 mx-auto" />
+          </div>
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-16">
             {professionalProjects.map((project, index) => (
               <ProjectTile 
                 key={project.id} 
                 project={project} 
                 index={index}
                 scrollY={scrollY}
-                sectionStart={sectionStart + 200}
+                sectionStart={sectionStart + (index * 150)}
               />
             ))}
           </div>
@@ -106,17 +145,26 @@ export const ProjectsSection = ({ scrollY }: ProjectsSectionProps) => {
 
         {/* Personal Projects */}
         <div>
-          <h3 className="text-2xl font-light tracking-widest text-muted-foreground uppercase mb-16 text-center">
-            Personal
-          </h3>
-          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-12">
+          <div 
+            className="text-center mb-20"
+            style={{
+              transform: `translateY(${-titleParallax * 0.8}px)`,
+              opacity: Math.max(0, Math.min(1, (scrollY - sectionStart - 600) / (window.innerHeight * 0.3)))
+            }}
+          >
+            <h3 className="text-4xl md:text-6xl font-light tracking-wide text-foreground mb-4">
+              🌱 Personal
+            </h3>
+            <div className="w-16 h-px bg-foreground/20 mx-auto" />
+          </div>
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-16">
             {personalProjects.map((project, index) => (
               <ProjectTile 
                 key={project.id} 
                 project={project} 
                 index={index}
                 scrollY={scrollY}
-                sectionStart={sectionStart + 800}
+                sectionStart={sectionStart + 800 + (index * 150)}
               />
             ))}
           </div>
