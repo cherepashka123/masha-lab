@@ -60,53 +60,63 @@ export const TreehouseChatbot = () => {
     <>
       {/* Chat Panel */}
       {isChatOpen && (
-        <div className="fixed inset-4 bg-white/95 backdrop-blur-xl border border-gray-200/50 rounded-3xl shadow-2xl z-50 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-400">
-          {/* Orb Background for Chat */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-            <img 
-              src="/Maria_Cherep_A_glowing_constellation_orb_designed_as_a_website_button,_surreal_3416095e-4f2a-4768-8fd4-854db8f10ddc.png"
-              alt="Background Orb"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Header */}
-          <div className="relative bg-white/80 backdrop-blur-sm text-gray-800 p-6 text-center font-light text-xl border-b border-gray-200/50">
-            Ask Maria Anything
+        <div className="fixed inset-8 bg-white border border-gray-100 shadow-xl z-50 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-400">
+          {/* Header with small orb */}
+          <div className="relative bg-white p-8 border-b border-gray-100">
+            <div className="flex items-center justify-center gap-4">
+              <img 
+                src="/Maria_Cherep_A_glowing_constellation_orb_designed_as_a_website_button,_surreal_3416095e-4f2a-4768-8fd4-854db8f10ddc.png"
+                alt="Maria's Constellation"
+                className="w-8 h-8 object-contain"
+              />
+              <h1 className="text-xl font-light text-black tracking-wide">ASK MARIA</h1>
+            </div>
             <button 
-              className="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-300"
+              className="absolute top-6 right-6 w-10 h-10 hover:bg-gray-50 flex items-center justify-center text-gray-400 hover:text-black transition-all duration-300"
               onClick={() => setIsChatOpen(false)}
             >
-              ×
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
             </button>
           </div>
 
           {/* Messages */}
-          <div className="relative flex-1 p-6 overflow-y-auto space-y-4">
+          <div className="flex-1 p-8 overflow-y-auto space-y-6 bg-gray-50/30">
             {messages.map((message, index) => (
               <div key={index} className={cn(
-                "max-w-[80%] p-4 rounded-2xl text-sm shadow-sm",
+                "max-w-[70%]",
                 message.sender === 'user' 
-                  ? "ml-auto bg-blue-500 text-white rounded-br-sm"
-                  : "bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-200/50 rounded-bl-sm"
+                  ? "ml-auto"
+                  : ""
               )}>
-                {message.text}
+                <div className={cn(
+                  "p-5 text-sm leading-relaxed",
+                  message.sender === 'user' 
+                    ? "bg-black text-white"
+                    : "bg-white border border-gray-100 text-gray-800"
+                )}>
+                  {message.text}
+                </div>
               </div>
             ))}
             
             {isTyping && (
-              <div className="max-w-[80%] p-4 rounded-2xl rounded-bl-sm bg-white/90 backdrop-blur-sm border border-gray-200/50 text-sm text-gray-600">
-                <em>Maria is typing...</em>
+              <div className="max-w-[70%]">
+                <div className="bg-white border border-gray-100 p-5 text-sm text-gray-500 italic">
+                  Maria is responding...
+                </div>
               </div>
             )}
 
             {/* Starter Questions */}
             {messages.length === 1 && (
-              <div className="space-y-3 mt-6">
+              <div className="space-y-3 mt-8">
+                <p className="text-xs uppercase tracking-widest text-gray-400 font-medium">SUGGESTED QUESTIONS</p>
                 {starterQuestions.map((question, index) => (
                   <button
                     key={index}
-                    className="block w-full text-left p-4 text-sm bg-white/70 hover:bg-white/90 text-gray-700 hover:text-gray-900 rounded-xl border border-gray-200/50 hover:border-gray-300 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-md"
+                    className="block w-full text-left p-4 text-sm bg-white hover:bg-gray-50 text-gray-700 border border-gray-100 hover:border-gray-200 transition-all duration-300"
                     onClick={() => handleStarterQuestion(question)}
                   >
                     {question}
@@ -117,21 +127,21 @@ export const TreehouseChatbot = () => {
           </div>
 
           {/* Input */}
-          <div className="relative p-6 bg-white/80 backdrop-blur-sm border-t border-gray-200/50">
-            <div className="flex gap-4">
+          <div className="p-8 bg-white border-t border-gray-100">
+            <div className="flex gap-0">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="Ask me anything about Maria..."
-                className="flex-1 px-5 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-gray-800 placeholder-gray-500"
+                placeholder="Type your question here..."
+                className="flex-1 px-6 py-4 bg-gray-50 border border-gray-200 outline-none focus:border-black text-sm text-black placeholder-gray-400 transition-all duration-300"
                 autoFocus
               />
               <button
                 onClick={() => handleSendMessage()}
                 disabled={!inputValue.trim()}
-                className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-full font-medium hover:scale-105 transition-all duration-300 shadow-sm"
+                className="px-8 py-4 bg-black hover:bg-gray-800 disabled:bg-gray-200 disabled:cursor-not-allowed text-white font-medium text-sm uppercase tracking-wide transition-all duration-300"
               >
                 Send
               </button>
