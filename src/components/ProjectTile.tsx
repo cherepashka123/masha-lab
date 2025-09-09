@@ -90,33 +90,40 @@ export const ProjectTile = ({ project, index, scrollY, sectionStart }: ProjectTi
         {/* Micro animations inspired by stefanstefancik.com */}
         {isHovered && (
           <>
-            {/* Floating dots */}
+            {/* Floating constellation dots */}
             <div className="absolute top-6 right-6">
               <div className="flex space-x-2">
-                {Array.from({ length: 4 }).map((_, i) => (
+                {Array.from({ length: 3 }).map((_, i) => (
                   <div
                     key={i}
                     className="w-2 h-2 bg-white/90 rounded-full animate-bounce opacity-80"
                     style={{ 
-                      animationDelay: `${i * 0.2}s`,
-                      animationDuration: '2s'
+                      animationDelay: `${i * 0.3}s`,
+                      animationDuration: '3s'
                     }}
                   />
                 ))}
               </div>
             </div>
             
-            {/* Animated lines */}
+            {/* Animated progress lines */}
             <div className="absolute bottom-6 left-6 right-6">
               <div className="flex justify-between items-center">
-                <div className="w-12 h-px bg-white/70 animate-pulse" />
-                <div className="w-8 h-px bg-white/50 animate-pulse" style={{ animationDelay: '0.5s' }} />
-                <div className="w-6 h-px bg-white/40 animate-pulse" style={{ animationDelay: '1s' }} />
+                <div className="w-16 h-px bg-white/70 animate-pulse" />
+                <div className="w-12 h-px bg-white/50 animate-pulse" style={{ animationDelay: '0.4s' }} />
+                <div className="w-8 h-px bg-white/40 animate-pulse" style={{ animationDelay: '0.8s' }} />
+                <div className="w-4 h-px bg-white/30 animate-pulse" style={{ animationDelay: '1.2s' }} />
               </div>
             </div>
             
-            {/* Corner accent */}
-            <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-white/40 rounded-tl-2xl animate-fade-in" />
+            {/* Geometric accent - inspired by stefanstefancik */}
+            <div className="absolute top-0 left-0 w-20 h-20 border-l-2 border-t-2 border-white/40 rounded-tl-2xl animate-fade-in" />
+            <div className="absolute bottom-0 right-0 w-12 h-12 border-r border-b border-white/30 rounded-br-2xl animate-fade-in" style={{ animationDelay: '0.6s' }} />
+            
+            {/* Floating cursor effect */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="w-3 h-3 border border-white/60 rounded-full animate-ping" />
+            </div>
           </>
         )}
 

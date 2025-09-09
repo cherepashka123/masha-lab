@@ -1,10 +1,10 @@
 import { ProjectTile } from "./ProjectTile";
-import dressxIcon from "@/assets/dressx-icon.png";
+import dressxIcon from "@/assets/dressx-logo.png";
 import devolatechIcon from "@/assets/devolatech-icon.png";
 import dragonCapitalIcon from "@/assets/dragon-capital-icon.png";
-import riseBarclaysIcon from "@/assets/rise-barclays-icon.png";
+import riseBarclaysIcon from "@/assets/barclays-logo.png";
 import nyuIcon from "@/assets/nyu-icon.png";
-import ukraineUsIcon from "@/assets/ukraine-us-icon.png";
+import ukraineUsIcon from "@/assets/ukraine-us-minimal.png";
 import nakedConfidenceIcon from "@/assets/naked-confidence-icon.png";
 import tabletochkiIcon from "@/assets/tabletochki-icon.png";
 
@@ -89,18 +89,18 @@ const personalProjects = [
   {
     id: "naked-confidence",
     title: "Naked Confidence",
-    category: "Wellness",
-    description: "Empowerment platform for body positivity and self-confidence",
-    media: nakedConfidenceIcon,
-    type: "image" as const,
-    year: "2024",
+    category: "Perfume Brand",
+    description: "Luxury fragrance brand celebrating confidence and self-expression",
+    media: "/A_hyperrealistic_cinematic_202509091804-2.mp4",
+    type: "video" as const,
+    year: "2022",
     route: "/projects/naked-confidence"
   },
   {
     id: "tabletochki",
     title: "Tabletochki",
-    category: "Healthcare",
-    description: "Digital health platform for medication management",
+    category: "Cancer Fund",
+    description: "Non-profit organization supporting cancer patients and research",
     media: tabletochkiIcon,
     type: "image" as const,
     year: "2023",
@@ -149,11 +149,11 @@ export const ProjectsSection = ({ scrollY }: ProjectsSectionProps) => {
             className="text-center mb-20"
             style={{
               transform: `translateY(${-titleParallax * 0.8}px)`,
-              opacity: Math.max(0, Math.min(1, (scrollY - sectionStart - 600) / (window.innerHeight * 0.3)))
+              opacity: Math.max(0, Math.min(1, (scrollY - sectionStart - 1200) / (window.innerHeight * 0.3)))
             }}
           >
             <h3 className="text-4xl md:text-6xl font-light tracking-wide text-foreground mb-4">
-              🌱 Personal
+              Personal
             </h3>
             <div className="w-16 h-px bg-foreground/20 mx-auto" />
           </div>
@@ -164,7 +164,7 @@ export const ProjectsSection = ({ scrollY }: ProjectsSectionProps) => {
                 project={project} 
                 index={index}
                 scrollY={scrollY}
-                sectionStart={sectionStart + 800 + (index * 150)}
+                sectionStart={sectionStart + 1400 + (index * 150)}
               />
             ))}
           </div>
