@@ -18,32 +18,26 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 flex items-center justify-center">
-      <div className="fixed bottom-8 right-8 z-50">
-        {/* Hyperrealistic Glowing Orb */}
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="relative">
+        {/* Hyperrealistic Glowing Orb - Centered */}
         <div 
           className="relative cursor-pointer transition-all duration-700 ease-out group"
           onClick={() => setIsLadderDropped(true)}
         >
           {/* Main Orb Image */}
-          <div className="relative w-20 h-20 group-hover:w-24 group-hover:h-24 transition-all duration-500">
+          <div className="relative w-24 h-24 group-hover:w-28 group-hover:h-28 transition-all duration-500">
             <img 
               src="/Maria_Cherep_A_glowing_constellation_orb_designed_as_a_website_button,_surreal_3416095e-4f2a-4768-8fd4-854db8f10ddc.png"
               alt="Constellation Orb"
-              className="w-full h-full object-contain drop-shadow-2xl"
+              className="w-full h-full object-contain filter drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-500"
             />
             
-            {/* Hyperrealistic glow effects */}
-            <div className="absolute inset-0 bg-gradient-radial from-primary/30 via-accent/20 to-transparent rounded-full blur-xl animate-pulse"></div>
-            <div className="absolute inset-2 bg-gradient-radial from-secondary/40 via-primary/20 to-transparent rounded-full blur-lg animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+            {/* Minimalist glow effects */}
+            <div className="absolute inset-0 bg-gradient-radial from-primary/20 to-transparent rounded-full blur-xl animate-pulse opacity-60"></div>
             
             {/* Interactive ripple effect on hover */}
-            <div className="absolute inset-0 bg-gradient-radial from-accent/20 to-transparent rounded-full scale-0 group-hover:scale-150 transition-all duration-1000 ease-out opacity-0 group-hover:opacity-100"></div>
-            
-            {/* Floating particles */}
-            <div className="absolute -top-2 -right-2 w-1 h-1 bg-accent rounded-full animate-ping opacity-60"></div>
-            <div className="absolute -bottom-1 -left-1 w-0.5 h-0.5 bg-primary rounded-full animate-ping opacity-40" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute top-1 -left-2 w-0.5 h-0.5 bg-secondary rounded-full animate-ping opacity-50" style={{ animationDelay: '1.5s' }}></div>
+            <div className="absolute inset-0 bg-gradient-radial from-accent/10 to-transparent rounded-full scale-0 group-hover:scale-150 transition-all duration-1000 ease-out opacity-0 group-hover:opacity-100"></div>
           </div>
         </div>
 
