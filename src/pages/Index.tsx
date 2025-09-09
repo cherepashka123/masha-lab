@@ -1,27 +1,32 @@
-import { useState } from "react";
-import { InteractiveVideoIntro } from "@/components/InteractiveVideoIntro";
-import { TreehouseLadder } from "@/components/TreehouseLadder";
-import { TreehouseChatbot } from "@/components/TreehouseChatbot";
+import { useEffect, useRef, useState } from "react";
+import { VideoHero } from "@/components/VideoHero";
+import { ProjectsSection } from "@/components/ProjectsSection";
+import { AboutSection } from "@/components/AboutSection";
 
 const Index = () => {
-  const [showLadder, setShowLadder] = useState(false);
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleOpenChat = () => {
-    setIsChatOpen(true);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <>
-      {!showLadder && (
-        <InteractiveVideoIntro 
-          onVideoEnd={() => setShowLadder(true)} 
-          onObjectSelect={() => {}} // No longer needed
-        />
-      )}
-      {showLadder && <TreehouseLadder onOpenChat={handleOpenChat} />}
-      {isChatOpen && <TreehouseChatbot />}
-    </>
+    <div ref={containerRef} className="relative">
+      {/* Video Hero Section */}
+      <VideoHero scrollY={scrollY} />
+      
+      {/* About Section */}
+      <AboutSection scrollY={scrollY} />
+      
+      {/* Projects Section */}
+      <ProjectsSection scrollY={scrollY} />
+    </div>
   );
 };
 
