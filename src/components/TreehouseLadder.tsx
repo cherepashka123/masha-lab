@@ -18,7 +18,7 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden cursor-pointer" onClick={() => setIsLadderDropped(true)}>
+    <div className="min-h-screen w-full bg-white relative overflow-hidden cursor-pointer" onClick={() => setIsLadderDropped(true)}>
       {/* Full Screen Orb Background */}
       <div className="absolute inset-0 flex items-center justify-center">
         <img 

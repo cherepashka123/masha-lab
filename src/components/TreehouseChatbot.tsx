@@ -60,12 +60,21 @@ export const TreehouseChatbot = () => {
     <>
       {/* Chat Panel */}
       {isChatOpen && (
-        <div className="fixed bottom-8 right-8 w-96 h-[32rem] bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-400">
+        <div className="fixed inset-4 bg-white/95 backdrop-blur-xl border border-gray-200/50 rounded-3xl shadow-2xl z-50 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-400">
+          {/* Orb Background for Chat */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+            <img 
+              src="/Maria_Cherep_A_glowing_constellation_orb_designed_as_a_website_button,_surreal_3416095e-4f2a-4768-8fd4-854db8f10ddc.png"
+              alt="Background Orb"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
           {/* Header */}
-          <div className="bg-white/5 backdrop-blur-sm text-white/90 p-4 text-center font-light text-base relative border-b border-white/10">
+          <div className="relative bg-white/80 backdrop-blur-sm text-gray-800 p-6 text-center font-light text-xl border-b border-gray-200/50">
             Ask Maria Anything
             <button 
-              className="absolute top-3 right-3 w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center text-white/60 hover:text-white/90 transition-all duration-300"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-all duration-300"
               onClick={() => setIsChatOpen(false)}
             >
               ×
@@ -73,31 +82,31 @@ export const TreehouseChatbot = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3">
+          <div className="relative flex-1 p-6 overflow-y-auto space-y-4">
             {messages.map((message, index) => (
               <div key={index} className={cn(
-                "max-w-[85%] p-3 rounded-2xl text-sm",
+                "max-w-[80%] p-4 rounded-2xl text-sm shadow-sm",
                 message.sender === 'user' 
-                  ? "ml-auto bg-white/10 backdrop-blur-sm text-white/90 border border-white/20 rounded-br-sm"
-                  : "bg-white/5 backdrop-blur-sm text-white/80 border border-white/10 rounded-bl-sm"
+                  ? "ml-auto bg-blue-500 text-white rounded-br-sm"
+                  : "bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-200/50 rounded-bl-sm"
               )}>
                 {message.text}
               </div>
             ))}
             
             {isTyping && (
-              <div className="max-w-[85%] p-3 rounded-2xl rounded-bl-sm bg-white/5 backdrop-blur-sm border border-white/10 text-sm text-white/60">
+              <div className="max-w-[80%] p-4 rounded-2xl rounded-bl-sm bg-white/90 backdrop-blur-sm border border-gray-200/50 text-sm text-gray-600">
                 <em>Maria is typing...</em>
               </div>
             )}
 
             {/* Starter Questions */}
             {messages.length === 1 && (
-              <div className="space-y-2 mt-4">
+              <div className="space-y-3 mt-6">
                 {starterQuestions.map((question, index) => (
                   <button
                     key={index}
-                    className="block w-full text-left p-3 text-xs bg-white/5 hover:bg-white/10 text-white/70 hover:text-white/90 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
+                    className="block w-full text-left p-4 text-sm bg-white/70 hover:bg-white/90 text-gray-700 hover:text-gray-900 rounded-xl border border-gray-200/50 hover:border-gray-300 transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-md"
                     onClick={() => handleStarterQuestion(question)}
                   >
                     {question}
@@ -108,19 +117,21 @@ export const TreehouseChatbot = () => {
           </div>
 
           {/* Input */}
-          <div className="p-4 bg-white/5 backdrop-blur-sm border-t border-white/10">
-            <div className="flex gap-3">
+          <div className="relative p-6 bg-white/80 backdrop-blur-sm border-t border-gray-200/50">
+            <div className="flex gap-4">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder="Ask me anything about Maria..."
-                className="flex-1 px-4 py-2.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full outline-none focus:ring-2 focus:ring-white/30 text-sm text-white/90 placeholder-white/50"
+                className="flex-1 px-5 py-3 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-gray-800 placeholder-gray-500"
+                autoFocus
               />
               <button
                 onClick={() => handleSendMessage()}
-                className="px-4 py-2.5 bg-white/20 hover:bg-white/30 text-white/90 rounded-full font-light hover:scale-105 transition-all duration-300 backdrop-blur-sm border border-white/20"
+                disabled={!inputValue.trim()}
+                className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-full font-medium hover:scale-105 transition-all duration-300 shadow-sm"
               >
                 Send
               </button>
