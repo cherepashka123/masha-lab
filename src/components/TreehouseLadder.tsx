@@ -63,16 +63,16 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
           className={cn(
             "absolute cursor-pointer transition-all duration-700 ease-out pointer-events-auto",
             isLadderDropped 
-              ? "w-40 h-16 rounded-2xl bg-gradient-to-r from-primary/90 via-accent/90 to-secondary/90 flex items-center justify-center text-primary-foreground font-medium text-base shadow-2xl hover:scale-105 hover:shadow-primary/50 border border-accent/30 backdrop-blur-sm" 
+              ? "w-36 h-14 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/80 hover:text-white font-light text-sm shadow-lg hover:shadow-xl border border-white/10 hover:border-white/20 backdrop-blur-md" 
               : "w-0 h-0 opacity-0"
           )}
           onClick={onOpenChat}
         >
           {isLadderDropped && (
             <div className="flex items-center gap-3 animate-fade-in">
-              <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+              <div className="w-1 h-1 bg-white/60 rounded-full animate-pulse"></div>
               <span>Enter Chat</span>
-              <div className="w-2 h-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+              <div className="w-1 h-1 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
             </div>
           )}
         </div>
