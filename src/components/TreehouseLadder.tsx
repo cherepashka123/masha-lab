@@ -29,44 +29,45 @@ export const TreehouseLadder = ({ onOpenChat }: TreehouseLadderProps) => {
         </div>
       </div>
 
-      {/* Burst Animation and Chat Button */}
-      <div className={cn(
-        "absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-out pointer-events-none",
-        isLadderDropped ? "opacity-100" : "opacity-0"
-      )}>
-        {/* Burst stars */}
-        {isLadderDropped && Array.from({ length: 12 }).map((_, index) => (
+        {/* Burst Animation and Chat Button */}
+        <div className={cn(
+          "absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-out pointer-events-none",
+          isLadderDropped ? "opacity-100" : "opacity-0"
+        )}>
+          {/* Burst stars */}
+          {isLadderDropped && Array.from({ length: 12 }).map((_, index) => (
+            <div 
+              key={index}
+              className="absolute w-2 h-2 bg-gray-400 rounded-full animate-ping"
+              style={{ 
+                top: `${Math.sin(index * 30 * Math.PI / 180) * 200 + 50}%`,
+                left: `${Math.cos(index * 30 * Math.PI / 180) * 200 + 50}%`,
+                animationDelay: `${index * 0.1}s`,
+                animationDuration: '2s'
+              }}
+            />
+          ))}
+          
+          {/* Chat Interface Button - positioned in center */}
           <div 
-            key={index}
-            className="absolute w-2 h-2 bg-accent rounded-full animate-ping"
-            style={{ 
-              top: `${Math.sin(index * 30 * Math.PI / 180) * 200 + 50}%`,
-              left: `${Math.cos(index * 30 * Math.PI / 180) * 200 + 50}%`,
-              animationDelay: `${index * 0.1}s`,
-              animationDuration: '2s'
-            }}
-          />
-        ))}
-        
-        {/* Chat Interface Button */}
-        <div 
-          className={cn(
-            "absolute cursor-pointer transition-all duration-700 ease-out pointer-events-auto",
-            isLadderDropped 
-              ? "w-36 h-14 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/80 hover:text-white font-light text-sm shadow-lg hover:shadow-xl border border-white/10 hover:border-white/20 backdrop-blur-md" 
-              : "w-0 h-0 opacity-0"
-          )}
-          onClick={onOpenChat}
-        >
-          {isLadderDropped && (
-            <div className="flex items-center gap-3 animate-fade-in">
-              <div className="w-1 h-1 bg-white/60 rounded-full animate-pulse"></div>
-              <span>Enter Chat</span>
-              <div className="w-1 h-1 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-            </div>
-          )}
+            className={cn(
+              "cursor-pointer transition-all duration-700 ease-out pointer-events-auto text-center",
+              isLadderDropped 
+                ? "opacity-100 scale-100" 
+                : "opacity-0 scale-95"
+            )}
+            onClick={onOpenChat}
+          >
+            {isLadderDropped && (
+              <div className="animate-fade-in">
+                <div className="w-6 h-6 bg-gray-400 rounded-full animate-pulse mx-auto mb-4"></div>
+                <div className="px-8 py-3 bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 transition-all duration-300">
+                  <span className="text-gray-800 font-light text-sm tracking-wide">ENTER CHAT</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
     </div>
   );
 };
