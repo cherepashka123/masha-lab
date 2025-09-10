@@ -67,16 +67,6 @@ const professionalProjects = [
 
 const personalProjects = [
   {
-    id: "ukraine-us",
-    title: "Ukraine → Life in the U.S.",
-    category: "Journey",
-    description: "A personal narrative of cultural transition and adaptation",
-    media: ukraineUsIcon,
-    type: "image" as const,
-    year: "2024",
-    route: "/projects/ukraine-us"
-  },
-  {
     id: "threadress",
     title: "Threadress",
     category: "Fashion Tech",

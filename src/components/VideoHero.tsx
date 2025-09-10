@@ -21,13 +21,16 @@ export const VideoHero = ({ scrollY }: VideoHeroProps) => {
     }
   }, []);
 
-  // Calculate parallax effect and floating video effect
-  const scrollProgress = Math.min(scrollY / window.innerHeight, 1);
-  const videoScale = Math.max(1 - scrollProgress * 0.85, 0.15);
-  const videoTransformY = scrollY * 0.4;
-  const videoTransformX = scrollProgress > 0.4 ? (scrollProgress - 0.4) * window.innerWidth * 0.7 : 0;
-  const overlayOpacity = Math.min(scrollY / (window.innerHeight * 0.7), 1);
-  const borderRadius = scrollProgress > 0.2 ? Math.min(scrollProgress * 24, 16) : 0;
+  // Enhanced smooth scroll calculations with easing
+  const scrollProgress = Math.min(scrollY / (window.innerHeight * 1.2), 1);
+  const easeProgress = scrollProgress * scrollProgress * (3 - 2 * scrollProgress); // Smooth cubic easing
+  
+  const videoScale = Math.max(1 - easeProgress * 0.75, 0.25);
+  const videoTransformY = scrollY * 0.3;
+  const videoTransformX = easeProgress > 0.3 ? (easeProgress - 0.3) * window.innerWidth * 0.5 : 0;
+  const overlayOpacity = Math.min(scrollY / (window.innerHeight * 0.8), 0.9);
+  const borderRadius = easeProgress > 0.15 ? Math.min(easeProgress * 20, 12) : 0;
+  const blur = easeProgress > 0.7 ? (easeProgress - 0.7) * 3 : 0;
   
   // Micro animation for welcome message
   const showWelcome = scrollY > 50 && scrollY < window.innerHeight * 0.3;
@@ -39,9 +42,10 @@ export const VideoHero = ({ scrollY }: VideoHeroProps) => {
         className="absolute inset-0 w-full h-full origin-center overflow-hidden"
         style={{
           transform: `translateY(${videoTransformY}px) translateX(${videoTransformX}px) scale(${videoScale})`,
-          transition: 'transform 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          transition: 'transform 0.05s cubic-bezier(0.23, 1, 0.32, 1)',
           borderRadius: `${borderRadius}px`,
-          filter: scrollProgress > 0.6 ? `blur(${(scrollProgress - 0.6) * 2}px)` : 'none'
+          filter: blur > 0 ? `blur(${blur}px)` : 'none',
+          willChange: 'transform'
         }}
       >
         <video
